@@ -1,7 +1,9 @@
-from django.urls import path
+from django.conf.urls import url
 
+# from django.urls import path
 from HotelsApp import views
 
 urlpatterns = [
-    path('', views.HotelsApp, name='HotelsApp'),
+    url(r'^$', views.HotelsApp, name='HotelsApp'),
 ]
+
