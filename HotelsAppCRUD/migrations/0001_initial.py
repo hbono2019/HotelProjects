@@ -37,7 +37,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='RoomService',
+            name='Service',
             fields=[
                 ('service_id', models.AutoField(primary_key=True, serialize=False)),
                 ('service_description', models.CharField(max_length=120)),
@@ -45,7 +45,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='RoomReservation',
+            name='Reservation',
             fields=[
                 ('reservation_id', models.AutoField(primary_key=True, serialize=False)),
                 ('room_number', models.CharField(max_length=120)),

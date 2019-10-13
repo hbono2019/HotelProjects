@@ -4,7 +4,14 @@
     <meta charset="UTF-8">
     <title>Hotels Maintenance Database</title>
 <body>
-<p>Hotels Maintenance Database</p>
+<p>Hotels Maintenance Application</p>
+<a href="{% url 'HotelsAppCRUD:customer_index' %}"> Customer Menu</a>
+<a href="{% url 'HotelsAppCRUD:hotel_index' %}"> Hotel Menu</a>
+<a href="{% url 'HotelsAppCRUD:room_index' %}"> Room Menu</a>
+<a href="{% url 'HotelsAppCRUD:rooms_billing_index' %}"> Room Billing Menu</a>
+<a href="{% url 'HotelsAppCRUD:rooms_charge_index' %}"> Room Charge Menu</a>
+<a href="{% url 'HotelsAppCRUD:rooms_reservation_index' %}"> Room Reservation Menu</a>
+<a href="{% url 'HotelsAppCRUD:rooms_service_index' %}"> Room Service Menu</a>
 </body>
 </head>
 </html>

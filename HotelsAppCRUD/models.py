@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from mongoengine import *
 
 # Create your models here.
@@ -15,6 +16,8 @@ class Hotel(models.Model):
     address = models.CharField(max_length=120)
     latitude = models.DecimalField(max_digits=9, decimal_places=6)
     longitude = models.DecimalField(max_digits=9, decimal_places=6)
+    def get_absolute_url(self):
+        return reverse('HotelsAppCRUD:hotel_list', kwargs={'pk': self.pk})
 
 
 class Room(models.Model):
