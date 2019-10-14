@@ -7,6 +7,9 @@ class Customer(models.Model):
     customer_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     credit_card_no =  models.CharField(max_length=100)
+    def get_absolute_url(self):
+        return reverse('HotelsAppCRUD:customer_index')
+
 
 class Hotel(models.Model):
     hotel_id = models.AutoField(primary_key=True)
@@ -17,7 +20,7 @@ class Hotel(models.Model):
     latitude = models.DecimalField(max_digits=9, decimal_places=6)
     longitude = models.DecimalField(max_digits=9, decimal_places=6)
     def get_absolute_url(self):
-        return reverse('HotelsAppCRUD:hotel_list', kwargs={'pk': self.pk})
+        return reverse('HotelsAppCRUD:hotel_index')
 
 
 class Room(models.Model):
@@ -29,6 +32,8 @@ class Room(models.Model):
     beds = models.IntegerField()
     max_occupancy = models.IntegerField()
     cost_per_night = models.IntegerField()
+    def get_absolute_url(self):
+        return reverse('HotelsAppCRUD:room_index')
 
 
 class RoomReservation(models.Model):
@@ -39,16 +44,25 @@ class RoomReservation(models.Model):
     room_number = models.CharField(max_length=120)
     from_date = models.DateTimeField()
     to_date = models.DateTimeField()
+    def get_absolute_url(self):
+        return reverse('HotelsAppCRUD:rooms_reservation_index')
+
 
 class RoomService(models.Model):
     service_id = models.AutoField(primary_key=True)
     service_description = models.CharField(max_length=120)
     service_price = models.DecimalField(max_digits=5, decimal_places=2)
+    def get_absolute_url(self):
+        return reverse('HotelsAppCRUD:rooms_service_index')
+
 
 class RoomCharges(models.Model):
     room_charge_id = models.AutoField(primary_key=True)
     reservation_id = models.ForeignKey(RoomReservation, on_delete=models.CASCADE)
     service_id = models.ForeignKey(RoomService, on_delete=models.CASCADE)
+    def get_absolute_url(self):
+        return reverse('HotelsAppCRUD:rooms_charge_index')
+
 
 class RoomBilling(models.Model):
     reservation_id = models.AutoField(primary_key=True)
@@ -60,3 +74,5 @@ class RoomBilling(models.Model):
     postal_code = models.CharField(max_length=20)
     country =  models.CharField(max_length=120)
     total_invoice = models.DecimalField(max_digits=5, decimal_places=2)
+    def get_absolute_url(self):
+        return reverse('HotelsAppCRUD:rooms_billing_index')

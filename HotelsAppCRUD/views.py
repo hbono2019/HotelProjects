@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic.list import ListView
 
 from HotelsAppCRUD.forms import *
 from HotelsAppCRUD.models import *
@@ -50,7 +50,6 @@ def RoomsService(request):
 
 class CustomerCreate(CreateView):
     template_name = "HotelsAppCRUD/Customers/customer_create.html"
-    form_class = CustomerForm
     def create_customer(request):
         if request.method == "POST":
             form=CustomerForm(request.POST)
@@ -60,21 +59,21 @@ class CustomerCreate(CreateView):
                return redirect('/Customers/'+ str(customer_item.id)+ '/')
         else:
             form = CustomerForm()
-            return render(request, 'HotelsAppCRUD/Customers/index.html', {'form': form})
+            context = {'form': form}
+            return render(request, template_name, context)
 
 
-class CustomerList(ListView):
-    template_name = "HotelsAppCRUD/Customers/customer_create.html"
-    form_class = CustomerForm
-    def list_customer(request):
-        if request.method == "POST":
-            form=HotelForm(request.POST)
-            if form.is_valid():
-               hotel_item = form.save(commit=False)
-               hotel_item.save()
-        else:
-            form = HotelForm()
-            return render(request, 'HotelsAppCRUD/Customers/index.html', {'form': form})
+class CustomerDetail(DetailView):
+    template_name = "HotelsAppCRUD/Customers/customer_detail.html"
+    pk_url_kwarg = 'id'
+    model = Customer
+    def get_context_data(self, **kwargs):
+        context = super(CustomerDetail, self).get_context_data(**kwargs)
+        return context
+    def post_detail(request, pk):
+        post = get_object_or_404(Customer, pk=pk)
+        context = {'post': post}
+        return render(request, template_name, context)
 
 
 class CustomerUpdate(UpdateView):
@@ -87,7 +86,8 @@ class CustomerUpdate(UpdateView):
            customer_item = form.save(commit=False)
            customer_item.save()
            return redirect('/Customers/' + str(customer_item.id) + '/')
-        return render(request, 'HotelsAppCRUD/Customers/index.html', {'form': form})
+        context = {'form': form}
+        return render(request, template_name, context)
 
 
 class CustomerDelete(DeleteView):
@@ -107,18 +107,21 @@ class HotelCreate(CreateView):
                return redirect('/Hotels/'+ str(hotel_item.id)+ '/')
         else:
             form = HotelForm()
-            return render(request, 'HotelsAppCRUD/Hotels/index.html', {'form': form})
+            context =  {'form': form}
+            return render(request, template_name, context)
 
-class HotelList(ListView):
-    template_name = "HotelsAppCRUD/Hotels/hotel_create.html"
-    form_class = HotelForm
-    def list_hotel(request, id=None):
-        item = get_object_or_404(Hotel, id=id)
-        form = HotelForm(request.POST or None, instance=item)
-        if form.is_valid():
-           hotel_item = form.save(commit=False)
-           hotel_item.save()
-           return render(request, 'HotelsAppCRUD/Hotels/index.html', {'form': form})
+
+class HotelDetail(DetailView):
+    template_name = "HotelsAppCRUD/Hotels/hotel_detail.html"
+    model = Hotel
+    pk_url_kwarg = 'id'
+    def get_context_data(self, **kwargs):
+        context = super(HotelDetail, self).get_context_data(**kwargs)
+        return context
+    def post_detail(request, pk):
+        post = get_object_or_404(Hotel, pk=pk)
+        context = {'post': post}
+        return render(request, template_name, context)
 
 
 class HotelUpdate(UpdateView):
@@ -131,7 +134,8 @@ class HotelUpdate(UpdateView):
             hotel_item = form.save(commit=False)
             hotel_item.save()
             return redirect('/Hotels/' + str(hotel_item.id) + '/')
-        return render(request, 'HotelsAppCRUD/Hotels/index.html', {'form': form})
+        context = {'form': form}
+        return render(request, template_name, context)
 
 
 class HotelDelete(DeleteView):
@@ -141,7 +145,6 @@ class HotelDelete(DeleteView):
 
 class RoomCreate(CreateView):
     template_name = "HotelsAppCRUD/Rooms/room_create.html"
-    form_class =RoomForm
     def create_room(request):
         if request.method == "POST":
             form=RoomForm(request.POST)
@@ -151,13 +154,20 @@ class RoomCreate(CreateView):
                return redirect('/Rooms/'+ str(room_item.id)+ '/')
         else:
             form = RoomForm()
-            return render(request, 'HotelsAppCRUD/Rooms/index.html', {'form': form})
+            context = {'form': form}
+            return render(request, template_name, context)
 
 
-class RoomList(ListView):
+class RoomDetail(DetailView):
+    template_name = "HotelsAppCRUD/Rooms/room_detail.html"
     model = Room
-    fields = ['hotel_id', 'room_number', 'room_type', 'type', 'beds', 'max_occupancy', 'cost_per_night']
-
+    def get_context_data(self, **kwargs):
+        context = super(RoomDetail, self).get_context_data(**kwargs)
+        return context
+    def post_detail(request, pk):
+        post = get_object_or_404(Room, pk=pk)
+        context = {'post': post}
+        return render(request, template_name, context)
 
 class RoomUpdate(UpdateView):
     template_name = "HotelsAppCRUD/Rooms/room_update.html"
@@ -169,7 +179,8 @@ class RoomUpdate(UpdateView):
             room_item = form.save(commit=False)
             room_item.save()
             return redirect('/Hotels/' + str(room_item.id) + '/')
-        return render(request, 'HotelsAppCRUD/Rooms/index.html', {'form': form})
+        context = {'form': form}
+        return render(request, template_name, context)
 
 
 class RoomDelete(DeleteView):
@@ -189,12 +200,20 @@ class RoomReservationCreate(CreateView):
                return redirect('/Hotels/'+ str(reservation_item.id)+ '/')
         else:
             form =RoomReservationForm()
-            return render(request, 'HotelsAppCRUD/Reservation/index.html', {'form': form})
+            context = {'form': form}
+            return render(request, template_name, context)
 
 
-class RoomReservationList(ListView):
+class RoomReservationDetail(DetailView):
+    template_name = "HotelsAppCRUD/Reservation/room_reservation_detail.html"
     model = RoomReservation
-    fields = ['hotel_id', 'customer_id', 'room_id', 'room_number', 'from_date, to_date']
+    def get_context_data(self, **kwargs):
+        context = super(RoomReservationDetail, self).get_context_data(**kwargs)
+        return context
+    def post_detail(request, pk):
+        post = get_object_or_404(RoomReservation, pk=pk)
+        context = {'post': post}
+        return render(request, template_name, context)
 
 
 class RoomReservationUpdate(UpdateView):
@@ -207,7 +226,8 @@ class RoomReservationUpdate(UpdateView):
             reservation_item = form.save(commit=False)
             reservation_item.save()
             return redirect('/Hotels/' + str(reservation_item.id) + '/')
-        return render(request, 'HotelsAppCRUD/Reservation/index.html', {'form': form})
+        context = {'form': form}
+        return render(request, 'HotelsAppCRUD/Reservation/index.html', context)
 
 
 class RoomReservationDelete(DeleteView):
@@ -217,7 +237,6 @@ class RoomReservationDelete(DeleteView):
 
 class RoomServiceCreate(CreateView):
     template_name = "HotelsAppCRUD/Hotels/hotel_create.html"
-    form_class = RoomServiceForm
     def create_service(request):
         if request.method == "POST":
             form = RoomServiceForm(request.POST)
@@ -227,12 +246,20 @@ class RoomServiceCreate(CreateView):
                return redirect('/Hotels/'+ str(service_item.id)+ '/')
         else:
             form = RoomServiceForm()
-            return render(request, 'HotelsAppCRUD/Service/index.html', {'form': form})
+            context = {'form': form}
+            return render(request, template_name, context)
 
 
-class RoomServiceList(ListView):
+class RoomServiceDetail(DetailView):
+    template_name = "HotelsAppCRUD/Service/room_service_detail.html"
     model = RoomService
-    fields = ['service_description', 'service_price']
+    def get_context_data(self, **kwargs):
+        context = super(RoomServiceDetail, self).get_context_data(**kwargs)
+        return context
+    def post_detail(request, pk):
+        post = get_object_or_404(RoomService, pk=pk)
+        context = {'post': post}
+        return render(request, template_name, context)
 
 
 class RoomServiceUpdate(UpdateView):
@@ -245,7 +272,8 @@ class RoomServiceUpdate(UpdateView):
             service_item = form.save(commit=False)
             service_item.save()
             return redirect('/Hotels/' + str(service_item.id) + '/')
-        return render(request, 'HotelsAppCRUD/Service/index.html', {'form': form})
+        context = {'form': form}
+        return render(request, template_name, context)
 
 
 class RoomServiceDelete(DeleteView):
@@ -255,7 +283,6 @@ class RoomServiceDelete(DeleteView):
 
 class RoomChargesCreate(CreateView):
     template_name = "HotelsAppCRUD/Charge/room_charge_create.html"
-    form_class = RoomChargesForm
     def create_charges(request):
         if request.method == "POST":
             form=RoomChargesForm(request.POST)
@@ -265,11 +292,19 @@ class RoomChargesCreate(CreateView):
                return redirect('/Hotels/'+ str(charge_item.id)+ '/')
         else:
             form = RoomChargesForm()
-            return render(request, 'HotelsAppCRUD/Charge/index.html', {'form': form})
+            context = {'form': form}
+            return render(request, template_name, context)
 
-class RoomChargesList(ListView):
+class RoomChargesDetail(DetailView):
+    template_name = "HotelsAppCRUD/Charge/room_charge_detail.html"
     model = RoomCharges
-    fields = ['reservation_id', 'service_id']
+    def get_context_data(self, **kwargs):
+        context = super(RoomChargesDetail, self).get_context_data(**kwargs)
+        return context
+    def post_detail(request, pk):
+        post = get_object_or_404(RoomCharges, pk=pk)
+        context = {'post': post}
+        return render(request, template_name, context)
 
 
 class RoomChargesUpdate(UpdateView):
@@ -282,7 +317,8 @@ class RoomChargesUpdate(UpdateView):
             charge_item = form.save(commit=False)
             charge_item.save()
             return redirect('/Hotels/' + str(charge_item.id) + '/')
-        return render(request, 'HotelsAppCRUD/Charge/index.html', {'form': form})
+        context = {'form': form}
+        return render(request, 'HotelsAppCRUD/Charge/index.html', context)
 
 
 class RoomChargesDelete(DeleteView):
@@ -302,17 +338,24 @@ class RoomBillingCreate(CreateView):
                return redirect('/Hotels/'+ str(billing_item.id)+ '/')
         else:
             form = RoomBillingForm()
-            return render(request, 'HotelsAppCRUD/Billing/index.html', {'form': form})
+            context = {'form': form}
+            return render(request, template_name, context)
 
 
-class RoomBillingList(ListView):
+class RoomBillingDetail(DetailView):
+    template_name = "HotelsAppCRUD/Billing/room_billing_detail.html"
     model = RoomBilling
-    fields = ['customer_id', 'room_charge_id', 'billing_address1', 'billing_address2', 'county', 'postal_code',
-              'country', 'total_invoice']
+    def get_context_data(self, **kwargs):
+        context = super(RoomBillingDetail, self).get_context_data(**kwargs)
+        return context
+    def post_detail(request, pk):
+        post = get_object_or_404(RoomBilling, pk=pk)
+        context = {'post': post}
+        return render(request, template_name, context)
 
 
 class RoomBillingUpdate(UpdateView):
-    template_name = "HotelsAppCRUD/Billing/room_billing_update.html.html"
+    template_name = "HotelsAppCRUD/Billing/room_billing_update.html"
     form_class = RoomBillingForm
     def update_billing(request, id=None):
         item = get_object_or_404(Hotel, id=id)
@@ -321,7 +364,8 @@ class RoomBillingUpdate(UpdateView):
             billing_item = form.save(commit=False)
             billing_item.save()
             return redirect('/Hotels/' + str(billing_item.id) + '/')
-        return render(request, 'HotelsAppCRUD/Billing/index.html', {'form': form})
+        context = {'form': form}
+        return render(request, template_name, context)
 
 
 class RoomBillingDelete(DeleteView):
