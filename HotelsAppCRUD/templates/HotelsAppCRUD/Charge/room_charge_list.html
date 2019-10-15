@@ -5,11 +5,32 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <title>Hotels Application</title>
-<body>
 <p>Room Charges Maintenance Database</p>
-<a href="{% url 'HotelsAppCRUD:rooms_charge_create' %}"> Room Charges Create</a>
-<a href="{% url 'HotelsAppCRUD:rooms_charge_detail' %}"> Room Charges List</a>
-<a href="{% url 'HotelsAppCRUD:rooms_charge_update' %}"> Room Charges Update</a>
-<a href="{% url 'HotelsAppCRUD:rooms_charge_delete' %}"> Room Charges Delete</a></body>
+{% block content %}
+  <h1>Room Charges List</h1>
+  {% if charges_list %}
+   <table class="table table-hover">
+      <thead>
+         <tr>
+           <th scope="col1">Choose option</th>
+           <th scope="col2"></th>
+        </tr>
+      </thead>
+      <tbody>
+       {% for charges in charges_list %}
+        <tr>
+           <th scope="row">{{charges.room_charge_id}}</th>
+               <td> <a href="{% url 'HotelsAppCRUD:room_charge_detail' pk=charges.room_charge_id %}" class="btn btn-info" role="button">Detail</a> </td>
+               <td> <a href="{% url 'HotelsAppCRUD:room_charge_update' pk=charges.room_charge_id %}" class="btn btn-info" role="button">Update</a> </td>
+               <td> <a href="{% url 'HotelsAppCRUD:room_charge_delete' pk=charges.room_charge_id %}" class="btn btn-info" role="button">Delete</a> </td>
+        </tr>
+       {% endfor %}
+      </tbody>
+   </table>
+  {% else %}
+     <p>There are no Room Charges in the database.</p>
+  {% endif %}
+{% endblock %}
+</body>
 </head>
 </html>

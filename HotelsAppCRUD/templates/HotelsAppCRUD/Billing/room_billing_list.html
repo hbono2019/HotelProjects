@@ -7,10 +7,31 @@
     <title>Hotels Application</title>
 <body>
 <p>Room Billing Maintenance Database</p>
-<a href="{% url 'HotelsAppCRUD:room_billing_create' %}"> Rooms Billing Create</a>
-<a href="{% url 'HotelsAppCRUD:room_billing_detail' %}"> Rooms Billing List</a>
-<a href="{% url 'HotelsAppCRUD:room_billing_update' %}"> Rooms Billing Update</a>
-<a href="{% url 'HotelsAppCRUD:room_billing_delete' %}"> Rooms Billing Delete</a>
+{% block content %}
+  <h1>Room Billing List</h1>
+  {% if billing_list %}
+   <table class="table table-hover">
+      <thead>
+         <tr>
+           <th scope="col1">Choose option</th>
+           <th scope="col2"></th>
+        </tr>
+      </thead>
+      <tbody>
+       {% for billing in billing_list %}
+        <tr>
+           <th scope="row">{{ hotel.name}}</th>
+               <td> <a href="{% url 'HotelsAppCRUD:room_billing_detail' pk=billing.reservation_id %}" class="btn btn-info" role="button">Detail</a> </td>
+               <td> <a href="{% url 'HotelsAppCRUD:room_billing__update' pk=billing.reservation_id %}" class="btn btn-info" role="button">Update</a> </td>
+               <td> <a href="{% url 'HotelsAppCRUD:room_billing__delete' pk=billing.reservation_id %}" class="btn btn-info" role="button">Delete</a> </td>
+        </tr>
+       {% endfor %}
+      </tbody>
+   </table>
+  {% else %}
+     <p>There are no Room Billing in the database.</p>
+  {% endif %}
+{% endblock %}
 </body>
 </head>
 </html>

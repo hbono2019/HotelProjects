@@ -130,6 +130,7 @@ class HotelDetail(DetailView):
 class HotelUpdate(UpdateView):
     template_name = "HotelsAppCRUD/Hotels/hotel_update.html"
     form_class = HotelForm
+    model = Hotel
     def update_hotel(request, id=None):
         item = get_object_or_404(Hotel, id=id)
         form = HotelForm(request.POST or None, instance=item)
@@ -178,6 +179,7 @@ class RoomDetail(DetailView):
 class RoomUpdate(UpdateView):
     template_name = "HotelsAppCRUD/Rooms/room_update.html"
     form_class = RoomForm
+    model = Room
     def update_room(request, id=None):
         item = get_object_or_404(Hotel, id=id)
         form = RoomForm(request.POST or None, instance=item)
@@ -227,6 +229,7 @@ class RoomReservationDetail(DetailView):
 class RoomReservationUpdate(UpdateView):
     template_name = "HotelsAppCRUD/Reservation/room_reservation_update.html"
     form_class = RoomReservationForm
+    model = RoomReservation
     def update_reservation(request, id=None):
         item = get_object_or_404(Hotel, id=id)
         form = RoomReservationForm(request.POST or None, instance=item)
@@ -276,6 +279,7 @@ class RoomServiceDetail(DetailView):
 class RoomServiceUpdate(UpdateView):
     template_name = "HotelsAppCRUD/Service/room_service_update.html"
     form_class = RoomServiceForm
+    model = RoomService
     def update_service(request, id=None):
         item = get_object_or_404(Hotel, id=id)
         form = RoomServiceForm(request.POST or None, instance=item)
@@ -326,6 +330,7 @@ class RoomChargesDetail(DetailView):
 class RoomChargesUpdate(UpdateView):
     template_name = "HotelsAppCRUD/Charge/room_charge_update.html"
     form_class = RoomChargesForm
+    model = RoomCharges
     def update_charges(request, id=None):
         item = get_object_or_404(Hotel, id=id)
         form = RoomChargesForm(request.POST or None, instance=item)
@@ -375,6 +380,7 @@ class RoomBillingDetail(DetailView):
 class RoomBillingUpdate(UpdateView):
     template_name = "HotelsAppCRUD/Billing/room_billing_update.html"
     form_class = RoomBillingForm
+    model = RoomBilling
     def update_billing(request, id=None):
         item = get_object_or_404(Hotel, id=id)
         form =RoomBillingForm(request.POST or None, instance=item)

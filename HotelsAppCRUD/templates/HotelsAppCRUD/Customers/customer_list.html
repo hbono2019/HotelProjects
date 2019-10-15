@@ -10,15 +10,26 @@
 {% block content %}
   <h1>Customer List</h1>
   {% if customer_list %}
-  <ul>
-    {% for customer in customer_list %}
-      <li>
-        <a href="{{ customer.get_absolute_url }}">{{ customer.name}}</a> ({{customer.credit_card_no}})
-      </li>
-    {% endfor %}
-  </ul>
+   <table class="table table-hover">
+      <thead>
+         <tr>
+           <th scope="col1">Choose option</th>
+           <th scope="col2"></th>
+        </tr>
+      </thead>
+      <tbody>
+       {% for customer in customer_list %}
+        <tr>
+           <th scope="row">{{ customer.name}}</th>
+               <td> <a href="{% url 'HotelsAppCRUD:customer_detail' pk=customer.customer_id %}" class="btn btn-info" role="button">Detail</a> </td>
+               <td> <a href="{% url 'HotelsAppCRUD:customer_update' pk=customer.customer_id %}" class="btn btn-info" role="button">Update</a> </td>
+               <td> <a href="{% url 'HotelsAppCRUD:customer_delete' pk=customer.customer_id %}" class="btn btn-info" role="button">Delete</a> </td>
+        </tr>
+       {% endfor %}
+      </tbody>
+   </table>
   {% else %}
-    <p>There are no Customers in the database.</p>
+     <p>There are no Customers in the database.</p>
   {% endif %}
 {% endblock %}
 </body>

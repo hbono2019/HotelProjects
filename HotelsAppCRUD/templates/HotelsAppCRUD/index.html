@@ -7,13 +7,44 @@
     <title>Hotels Maintenance Database</title>
 <body>
 <p>Hotels Maintenance Application</p>
-<a href="{% url 'HotelsAppCRUD:customer_index' %}"> Customer Menu</a>
-<a href="{% url 'HotelsAppCRUD:hotel_index' %}"> Hotel Menu</a>
-<a href="{% url 'HotelsAppCRUD:room_index' %}"> Room Menu</a>
-<a href="{% url 'HotelsAppCRUD:rooms_billing_index' %}"> Room Billing Menu</a>
-<a href="{% url 'HotelsAppCRUD:rooms_charge_index' %}"> Room Charge Menu</a>
-<a href="{% url 'HotelsAppCRUD:rooms_reservation_index' %}"> Room Reservation Menu</a>
-<a href="{% url 'HotelsAppCRUD:rooms_service_index' %}"> Room Service Menu</a>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col1">Choose option</th>
+      <th scope="col2"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Customer Menu</th>
+      <td> <a href="{% url 'HotelsAppCRUD:customer_index' %}"> Customer Menu</a> </td>
+    </tr>
+    <tr>
+      <th scope="row">Hotel Menu</th>
+      <td> <a href="{% url 'HotelsAppCRUD:hotel_index' %}"> Hotel Menu</a> </td>
+    </tr>
+    <tr>
+      <th scope="row">Room Menu</th>
+      <td> <a href="{% url 'HotelsAppCRUD:room_index' %}"> Room Menu</a> </td>
+    </tr>
+    <tr>
+      <th scope="row">Room Billing Menu</th>
+      <td> <a href="{% url 'HotelsAppCRUD:rooms_billing_index' %}"> Room Billing Menu</a> </td>
+    </tr>
+    <tr>
+      <th scope="row">Room Charge Menu</th>
+      <td> <a href="{% url 'HotelsAppCRUD:rooms_charge_index' %}"> Room Charge Menu</a> </td>
+    </tr>
+    <tr>
+      <th scope="row">Room Reservation Menu</th>
+      <td> <a href="{% url 'HotelsAppCRUD:rooms_reservation_index' %}"> Room Reservation Menu</a> </td>
+    </tr>
+    <tr>
+      <th scope="row">Room Service Menu</th>
+      <td> <a href="{% url 'HotelsAppCRUD:rooms_service_index' %}">Room Service Menu</a> </td>
+    </tr>
+  </tbody>
+</table>
 </body>
 </head>
 </html>
