@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotels Application</title>
+<body>
+<p>Hotels Maintenance Database</p>
+{% block content %}
+  <h1>Hotel List</h1>
+  {% if hotel_list %}
+  <ul>
+    {% for hotel in hotel_list %}
+     <li>
+        <a href="{% url 'HotelsAppCRUD:hotel_detail' pk=hotel.hotel_id %}"> {{hotel.name}} {{hotel.description}}</a>
+     </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no Hotels in the database.</p>
+  {% endif %}
+{% endblock %}
+</body>
+</head>
+</html>

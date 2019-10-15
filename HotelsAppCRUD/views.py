@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.list import ListView
 
 from HotelsAppCRUD.forms import *
 from HotelsAppCRUD.models import *
@@ -50,6 +51,7 @@ def RoomsService(request):
 
 class CustomerCreate(CreateView):
     template_name = "HotelsAppCRUD/Customers/customer_create.html"
+    form_class = CustomerForm
     def create_customer(request):
         if request.method == "POST":
             form=CustomerForm(request.POST)
@@ -63,18 +65,18 @@ class CustomerCreate(CreateView):
             return render(request, template_name, context)
 
 
+class CustomerList(ListView):
+    template_name = "HotelsAppCRUD/Customers/customer_list.html"
+    model = Customer
+    context_object_name = 'customer_list'
+    queryset = Customer.objects.all()
+    paginate_by = 10
+    ordering = ['-customer_id']
+
+
 class CustomerDetail(DetailView):
     template_name = "HotelsAppCRUD/Customers/customer_detail.html"
-    pk_url_kwarg = 'id'
     model = Customer
-    def get_context_data(self, **kwargs):
-        context = super(CustomerDetail, self).get_context_data(**kwargs)
-        return context
-    def post_detail(request, pk):
-        post = get_object_or_404(Customer, pk=pk)
-        context = {'post': post}
-        return render(request, template_name, context)
-
 
 class CustomerUpdate(UpdateView):
     template_name = "HotelsAppCRUD/Customers/customer_update.html"
@@ -100,28 +102,29 @@ class HotelCreate(CreateView):
     form_class = HotelForm
     def create_hotel(request):
         if request.method == "POST":
-            form=HotelForm(request.POST)
+            form = HotelForm(request.POST)
             if form.is_valid():
                hotel_item = form.save(commit=False)
                hotel_item.save()
                return redirect('/Hotels/'+ str(hotel_item.id)+ '/')
         else:
             form = HotelForm()
-            context =  {'form': form}
+            context = {'form': form}
             return render(request, template_name, context)
+
+class HotelList(ListView):
+    template_name = "HotelsAppCRUD/Hotels/hotel_list.html"
+    form_class = HotelForm
+    model = Hotel
+    queryset = Hotel.objects.all()
+    context_object_name = 'hotel_list'
+    paginate_by = 10
+    ordering = ['-hotel_id']
 
 
 class HotelDetail(DetailView):
     template_name = "HotelsAppCRUD/Hotels/hotel_detail.html"
     model = Hotel
-    pk_url_kwarg = 'id'
-    def get_context_data(self, **kwargs):
-        context = super(HotelDetail, self).get_context_data(**kwargs)
-        return context
-    def post_detail(request, pk):
-        post = get_object_or_404(Hotel, pk=pk)
-        context = {'post': post}
-        return render(request, template_name, context)
 
 
 class HotelUpdate(UpdateView):
@@ -145,6 +148,7 @@ class HotelDelete(DeleteView):
 
 class RoomCreate(CreateView):
     template_name = "HotelsAppCRUD/Rooms/room_create.html"
+    form_class =  RoomForm
     def create_room(request):
         if request.method == "POST":
             form=RoomForm(request.POST)
@@ -158,16 +162,18 @@ class RoomCreate(CreateView):
             return render(request, template_name, context)
 
 
+class RoomList(ListView):
+    template_name = "HotelsAppCRUD/Rooms/room_detail.html"
+    model = Room
+    context_object_name = 'room_list'
+    queryset = Room.objects.all()
+    paginate_by = 10
+    ordering = ['-room_id']
+
+
 class RoomDetail(DetailView):
     template_name = "HotelsAppCRUD/Rooms/room_detail.html"
     model = Room
-    def get_context_data(self, **kwargs):
-        context = super(RoomDetail, self).get_context_data(**kwargs)
-        return context
-    def post_detail(request, pk):
-        post = get_object_or_404(Room, pk=pk)
-        context = {'post': post}
-        return render(request, template_name, context)
 
 class RoomUpdate(UpdateView):
     template_name = "HotelsAppCRUD/Rooms/room_update.html"
@@ -204,16 +210,18 @@ class RoomReservationCreate(CreateView):
             return render(request, template_name, context)
 
 
+class RoomReservationList(ListView):
+    template_name = "HotelsAppCRUD/Reservation/room_reservation_list.html"
+    model = RoomReservation
+    context_object_name = 'reservation_list'
+    queryset = RoomReservation.objects.all()
+    paginate_by = 10
+    ordering = ['-reservation_id']
+
+
 class RoomReservationDetail(DetailView):
     template_name = "HotelsAppCRUD/Reservation/room_reservation_detail.html"
     model = RoomReservation
-    def get_context_data(self, **kwargs):
-        context = super(RoomReservationDetail, self).get_context_data(**kwargs)
-        return context
-    def post_detail(request, pk):
-        post = get_object_or_404(RoomReservation, pk=pk)
-        context = {'post': post}
-        return render(request, template_name, context)
 
 
 class RoomReservationUpdate(UpdateView):
@@ -237,6 +245,7 @@ class RoomReservationDelete(DeleteView):
 
 class RoomServiceCreate(CreateView):
     template_name = "HotelsAppCRUD/Hotels/hotel_create.html"
+    form_class = RoomServiceForm
     def create_service(request):
         if request.method == "POST":
             form = RoomServiceForm(request.POST)
@@ -250,16 +259,18 @@ class RoomServiceCreate(CreateView):
             return render(request, template_name, context)
 
 
+class RoomServiceList(ListView):
+    template_name = "HotelsAppCRUD/Service/room_service_list.html"
+    model = RoomReservation
+    context_object_name = 'service_list'
+    queryset = RoomService.objects.all()
+    paginate_by = 10
+    ordering = ['-service_id']
+
+
 class RoomServiceDetail(DetailView):
     template_name = "HotelsAppCRUD/Service/room_service_detail.html"
     model = RoomService
-    def get_context_data(self, **kwargs):
-        context = super(RoomServiceDetail, self).get_context_data(**kwargs)
-        return context
-    def post_detail(request, pk):
-        post = get_object_or_404(RoomService, pk=pk)
-        context = {'post': post}
-        return render(request, template_name, context)
 
 
 class RoomServiceUpdate(UpdateView):
@@ -283,6 +294,7 @@ class RoomServiceDelete(DeleteView):
 
 class RoomChargesCreate(CreateView):
     template_name = "HotelsAppCRUD/Charge/room_charge_create.html"
+    form_class = RoomChargesForm
     def create_charges(request):
         if request.method == "POST":
             form=RoomChargesForm(request.POST)
@@ -295,16 +307,20 @@ class RoomChargesCreate(CreateView):
             context = {'form': form}
             return render(request, template_name, context)
 
+
+class RoomChargesList(ListView):
+    template_name = "HotelsAppCRUD/Charge/room_charge_list.html"
+    model = RoomCharges
+    context_object_name = 'charges_list'
+    queryset = RoomCharges.objects.all()
+    paginate_by = 10
+    ordering = ['-room_charge_id']
+
+
+
 class RoomChargesDetail(DetailView):
     template_name = "HotelsAppCRUD/Charge/room_charge_detail.html"
     model = RoomCharges
-    def get_context_data(self, **kwargs):
-        context = super(RoomChargesDetail, self).get_context_data(**kwargs)
-        return context
-    def post_detail(request, pk):
-        post = get_object_or_404(RoomCharges, pk=pk)
-        context = {'post': post}
-        return render(request, template_name, context)
 
 
 class RoomChargesUpdate(UpdateView):
@@ -342,16 +358,18 @@ class RoomBillingCreate(CreateView):
             return render(request, template_name, context)
 
 
+class RoomBillingList(ListView):
+    template_name = "HotelsAppCRUD/Billing/room_billing_list.html"
+    model = RoomBilling
+    context_object_name = 'charges_list'
+    queryset = RoomBilling.objects.all()
+    paginate_by = 10
+    ordering = ['-reservation_id']
+
+
 class RoomBillingDetail(DetailView):
     template_name = "HotelsAppCRUD/Billing/room_billing_detail.html"
     model = RoomBilling
-    def get_context_data(self, **kwargs):
-        context = super(RoomBillingDetail, self).get_context_data(**kwargs)
-        return context
-    def post_detail(request, pk):
-        post = get_object_or_404(RoomBilling, pk=pk)
-        context = {'post': post}
-        return render(request, template_name, context)
 
 
 class RoomBillingUpdate(UpdateView):

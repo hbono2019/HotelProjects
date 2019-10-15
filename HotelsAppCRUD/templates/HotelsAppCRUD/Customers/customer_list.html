@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotels Application</title>
+<body>
+<p>Customer Maintenance Database</p>
+{% block content %}
+  <h1>Customer List</h1>
+  {% if customer_list %}
+  <ul>
+    {% for customer in customer_list %}
+      <li>
+        <a href="{{ customer.get_absolute_url }}">{{ customer.name}}</a> ({{customer.credit_card_no}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no Customers in the database.</p>
+  {% endif %}
+{% endblock %}
+</body>
+</head>
+</html>

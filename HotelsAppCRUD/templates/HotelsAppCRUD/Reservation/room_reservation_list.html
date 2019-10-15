@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotels Application</title>
+<body>
+<p>Rooms Reservation Maintenance Database</p>
+{% block content %}
+  <h1>Reservation List</h1>
+  {% if reservation_list %}
+  <ul>
+    {% for reservation in reservation_list %}
+      <li>
+        <a href="{{ reservation.get_absolute_url }}">{{ reservation.reservation_id}}</a> ({{reservation.room_number}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no Hotels in the database.</p>
+  {% endif %}
+{% endblock %}
+</body>
+</head>
+</html>
