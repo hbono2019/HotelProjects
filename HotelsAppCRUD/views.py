@@ -67,6 +67,7 @@ class CustomerCreate(CreateView):
 
 class CustomerList(ListView):
     template_name = "HotelsAppCRUD/Customers/customer_list.html"
+    form_class = CustomerForm
     model = Customer
     context_object_name = 'customer_list'
     queryset = Customer.objects.all()
@@ -180,7 +181,8 @@ class RoomCreate(CreateView):
 
 
 class RoomList(ListView):
-    template_name = "HotelsAppCRUD/Rooms/room_detail.html"
+    template_name = "HotelsAppCRUD/Rooms/room_list.html"
+    form_class = RoomForm
     model = Room
     context_object_name = 'room_list'
     queryset = Room.objects.all()
@@ -278,7 +280,7 @@ class RoomReservationDelete(DeleteView):
 
 
 class RoomServiceCreate(CreateView):
-    template_name = "HotelsAppCRUD/Hotels/hotel_create.html"
+    template_name = "HotelsAppCRUD/Service/room_service_create.html"
     form_class = RoomServiceForm
     def create_service(request):
         if request.method == "POST":

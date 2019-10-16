@@ -43,8 +43,8 @@ class RoomReservation(models.Model):
     customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE, default='')
     room_id = models.ForeignKey(Room, on_delete=models.CASCADE)
     room_number = models.CharField(max_length=120)
-    from_date = models.DateTimeField()
-    to_date = models.DateTimeField()
+    from_date = models.DateField()
+    to_date = models.DateField()
     payment_no = models.CharField(max_length=120)
     def get_absolute_url(self):
         return reverse('HotelsAppCRUD:rooms_reservation_index')
