@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <title>Hotels Maintenance Database</title>
+<body>
+<p>Confirm Delete</p>
+ {% block content %}
+<form action="" method="POST">
+    {% csrf_token %}
+    <h1>Confirm Delete the following "{{ object.reservation_id }} {{ object.customer_id }} {{ object.room_charge_id }}"</h1>
+    <p><input type='Submit' value='Yes'/><a href="../"> Cancel</a></p>
+</form>
+{% endblock %}
+</body>
+</head>
+</html>
