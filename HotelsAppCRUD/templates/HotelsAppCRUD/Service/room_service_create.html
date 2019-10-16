@@ -7,10 +7,13 @@
     <title>Room Service Create</title>
 </head>
 <body>
+{% load crispy_forms_tags %}
+{% block content %}
 <form action="" method="POST">
 {% csrf_token %}
-{{ form }}
+{{ form|crispy }}
 <button type="submit">SUBMIT</button>
 </form>
+{% endblock %}
 </body>
 </html>

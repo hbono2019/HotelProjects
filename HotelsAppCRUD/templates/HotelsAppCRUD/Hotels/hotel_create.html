@@ -7,10 +7,13 @@
     <title>Hotel Create</title>
 </head>
 <body>
+{% load crispy_forms_tags %}
+{% block content %}
 <form action="" method="POST">
 {% csrf_token %}
-{{ form.as_table }}
+{{ form|crispy }}
 <button type="submit" class="btn btn-success">Save Hotel</button>
 </form>
+{% endblock %}
 </body>
 </html>

@@ -7,10 +7,10 @@
     <title>Room Service Detail</title>
 </head>
 <body>
-<form action="" method="POST">
-{% csrf_token %}
-{{ form }}
-<button type="submit">SUBMIT</button>
-</form>
+{% block content %}
+  <h1>Service Id: {{ roomservice.service_id }}</h1>
+  <p><strong>Service Description:</strong> {{ roomservice.service_description }}</p>
+  <p><strong>Service Price:</strong> {{ roomservice.service_price }}</p>
+{% endblock %}
 </body>
 </html>

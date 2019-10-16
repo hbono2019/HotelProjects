@@ -7,10 +7,11 @@
     <title>Room Service Detail</title>
 </head>
 <body>
-<form action="" method="POST">
-{% csrf_token %}
-{{ form }}
-<button type="submit">SUBMIT</button>
-</form>
+{% block content %}
+  <h1>Room Charge Id: {{ roomcharges.room_charge_id }}</h1>
+  <p><strong>Reservation Id:</strong> {{ roomcharges.reservation_id }}</p>
+  <p><strong>Service Id:</strong> {{ roomcharges.service_id }}</p>
+  <p><strong>description:</strong> {{ roomcharges.description }}</p>
+{% endblock %}
 </body>
 </html>

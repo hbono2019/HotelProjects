@@ -7,10 +7,15 @@
     <title>Room Detail</title>
 </head>
 <body>
-<form action="" method="POST">
-{% csrf_token %}
-{{ form }}
-<button type="submit">SUBMIT</button>
-</form>
+{% block content %}
+  <h1>Room Id: {{ room.room_id }}</h1>
+  <p><strong>Hotel Id:</strong> {{ room.hotel_id }}</p>
+  <p><strong>Room Number:</strong> {{ room.room_number }}</p>
+  <p><strong>Room Type:</strong> {{ room.room_type }}</p>
+  <p><strong>Type:</strong> {{ room.type }}</p>
+  <p><strong>Beds:</strong> {{ room.beds }}</p>
+  <p><strong>Max Occupancy:</strong> {{ room.max_occupancy }}</p>
+  <p><strong>Cost per Night:</strong> {{ room.cost_per_night }}</p>
+{% endblock %}
 </body>
 </html>
