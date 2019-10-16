@@ -15,7 +15,7 @@ class HotelForm(ModelForm):
 class CustomerForm(ModelForm):
     class Meta:
         model = Customer
-        fields = ['name', 'credit_card_no']
+        fields = ['name', 'credit_card_no', 'email']
 
 class RoomForm(ModelForm):
      class Meta:

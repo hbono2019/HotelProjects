@@ -6,7 +6,8 @@ from mongoengine import *
 class Customer(models.Model):
     customer_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
-    credit_card_no =  models.CharField(max_length=100)
+    credit_card_no = models.CharField(max_length=100)
+    email = models.CharField(max_length=100, default='')
     def get_absolute_url(self):
         return reverse('HotelsAppCRUD:customer_index')
 
