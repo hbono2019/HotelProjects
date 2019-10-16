@@ -39,11 +39,12 @@ class Room(models.Model):
 class RoomReservation(models.Model):
     reservation_id = models.AutoField(primary_key=True)
     hotel_id = models.ForeignKey(Hotel, on_delete=models.CASCADE)
-    customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE,default='')
+    customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE, default='')
     room_id = models.ForeignKey(Room, on_delete=models.CASCADE)
     room_number = models.CharField(max_length=120)
     from_date = models.DateTimeField()
     to_date = models.DateTimeField()
+    payment_no = models.CharField(max_length=120)
     def get_absolute_url(self):
         return reverse('HotelsAppCRUD:rooms_reservation_index')
 
@@ -51,7 +52,7 @@ class RoomReservation(models.Model):
 class RoomService(models.Model):
     service_id = models.AutoField(primary_key=True)
     service_description = models.CharField(max_length=120)
-    service_price = models.DecimalField(max_digits=5, decimal_places=2)
+    service_price = models.DecimalField(max_digits=5, decimal_places=2, default='')
     def get_absolute_url(self):
         return reverse('HotelsAppCRUD:rooms_service_index')
 
@@ -60,6 +61,7 @@ class RoomCharges(models.Model):
     room_charge_id = models.AutoField(primary_key=True)
     reservation_id = models.ForeignKey(RoomReservation, on_delete=models.CASCADE)
     service_id = models.ForeignKey(RoomService, on_delete=models.CASCADE)
+    description = models.CharField(max_length=120, default='')
     def get_absolute_url(self):
         return reverse('HotelsAppCRUD:rooms_charge_index')
 

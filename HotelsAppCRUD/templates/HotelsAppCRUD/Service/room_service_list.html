@@ -21,9 +21,9 @@
        {% for service in service_list %}
         <tr>
            <th scope="row">{{ hotel.name}}</th>
-               <td> <a href="{% url 'HotelsAppCRUD:room_service_detail' pk=service.service_id %}" class="btn btn-info" role="button">Detail</a> </td>
-               <td> <a href="{% url 'HotelsAppCRUD:room_service_update' pk=service.service_id %}" class="btn btn-info" role="button">Update</a> </td>
-               <td> <a href="{% url 'HotelsAppCRUD:room_service_delete' pk=service.service_id %}" class="btn btn-info" role="button">Delete</a> </td>
+               <td> <a href="{% url 'HotelsAppCRUD:rooms_service_detail' pk=service.service_id %}" class="btn btn-info" role="button">Detail</a> </td>
+               <td> <a href="{% url 'HotelsAppCRUD:rooms_service_update' pk=service.service_id %}" class="btn btn-info" role="button">Update</a> </td>
+               <td> <a href="{% url 'HotelsAppCRUD:rooms_service_delete' pk=service.service_id %}" class="btn btn-info" role="button">Delete</a> </td>
         </tr>
        {% endfor %}
       </tbody>

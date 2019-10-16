@@ -64,7 +64,6 @@ class CustomerCreate(CreateView):
             context = {'form': form}
             return render(request, template_name, context)
 
-
 class CustomerList(ListView):
     template_name = "HotelsAppCRUD/Customers/customer_list.html"
     model = Customer
@@ -94,7 +93,7 @@ class CustomerUpdate(UpdateView):
 
 class CustomerDelete(DeleteView):
     model = Customer
-    success_url = reverse_lazy('Customers/index.html')
+    success_url = reverse_lazy('HotelsAppCRUD/Customers/index.html')
 
 
 class HotelCreate(CreateView):
@@ -144,7 +143,7 @@ class HotelUpdate(UpdateView):
 
 class HotelDelete(DeleteView):
     model = Hotel
-    success_url = reverse_lazy('Hotels/index.html')
+    success_url = reverse_lazy('HotelsAppCRUD/Hotels/index.html')
 
 
 class RoomCreate(CreateView):
@@ -193,7 +192,7 @@ class RoomUpdate(UpdateView):
 
 class RoomDelete(DeleteView):
     model = Room
-    success_url = reverse_lazy('Rooms/index.html')
+    success_url = reverse_lazy('HotelsAppCRUD/Rooms/index.html')
 
 
 class RoomReservationCreate(CreateView):
@@ -243,7 +242,7 @@ class RoomReservationUpdate(UpdateView):
 
 class RoomReservationDelete(DeleteView):
     model = RoomReservation
-    success_url = reverse_lazy('Reservation/index.html')
+    success_url = reverse_lazy('HotelsAppCRUD/Reservation/index.html')
 
 
 class RoomServiceCreate(CreateView):
@@ -293,7 +292,7 @@ class RoomServiceUpdate(UpdateView):
 
 class RoomServiceDelete(DeleteView):
     model = RoomReservation
-    success_url = reverse_lazy('Service/index.html')
+    success_url = reverse_lazy('HotelsAppCRUD/Service/index.html')
 
 
 class RoomChargesCreate(CreateView):
@@ -344,7 +343,7 @@ class RoomChargesUpdate(UpdateView):
 
 class RoomChargesDelete(DeleteView):
     model = RoomCharges
-    success_url = reverse_lazy('Charge/index.html')
+    success_url = reverse_lazy('HotelsAppCRUD/Charge/index.html')
 
 
 class RoomBillingCreate(CreateView):
@@ -394,4 +393,4 @@ class RoomBillingUpdate(UpdateView):
 
 class RoomBillingDelete(DeleteView):
     model = RoomBilling
-    success_url = reverse_lazy('Billing/index.html')
+    success_url = reverse_lazy('HotelsAppCRUD/Billing/index.html')

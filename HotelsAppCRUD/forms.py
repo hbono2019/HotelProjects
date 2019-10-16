@@ -1,6 +1,5 @@
 import datetime
 
-from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 from django.utils.translation import ugettext_lazy as _
@@ -13,17 +12,17 @@ class HotelForm(ModelForm):
           model=Hotel
           fields = ['name', 'description', 'star_rating', 'address', 'latitude', 'longitude']
 
-class CustomerForm(forms.Form):
+class CustomerForm(ModelForm):
     class Meta:
         model = Customer
         fields = ['name', 'credit_card_no']
 
-class RoomForm(forms.Form):
+class RoomForm(ModelForm):
      class Meta:
          model = Room
          fields = ['hotel_id', 'room_number', 'room_type', 'type', 'beds', 'max_occupancy', 'cost_per_night']
 
-class RoomReservationForm(forms.Form):
+class RoomReservationForm(ModelForm):
     def clean_from_date(self):
         from_date_data = self.cleaned_data['from_date']
 
@@ -47,19 +46,19 @@ class RoomReservationForm(forms.Form):
         return to_date_data
     class Meta:
         model = RoomReservation
-        fields = ['hotel_id', 'customer_id', 'room_id', 'room_number', 'from_date, to_date']
+        fields = ['hotel_id', 'customer_id', 'room_id', 'room_number', 'from_date', 'to_date', 'payment_no']
 
-class RoomServiceForm(forms.Form):
+class RoomServiceForm(ModelForm):
     class Meta:
         model = RoomService
         fields = ['service_description', 'service_price']
 
-class RoomChargesForm(forms.Form):
+class RoomChargesForm(ModelForm):
     class Meta:
         model = RoomCharges
-        fields = ['reservation_id', 'service_id']
+        fields = ['reservation_id', 'service_id', 'description']
 
-class  RoomBillingForm(forms.Form):
+class  RoomBillingForm(ModelForm):
     class Meta:
         model =  RoomBilling
         fields = ['customer_id', 'room_charge_id', 'billing_address1', 'billing_address2', 'county', 'postal_code', 'country', 'total_invoice']
