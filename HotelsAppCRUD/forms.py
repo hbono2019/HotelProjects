@@ -10,12 +10,12 @@ from .models import *
 class HotelForm(ModelForm):
       class Meta:
           model=Hotel
-          fields = ['name', 'description', 'star_rating', 'address', 'latitude', 'longitude']
+          fields = ['name', 'description', 'star_rating', 'address1', 'address2', 'county', 'postal_code', 'country', 'latitude', 'longitude']
 
 class CustomerForm(ModelForm):
     class Meta:
         model = Customer
-        fields = ['name', 'credit_card_no', 'email']
+        fields = ['name', 'credit_card_no', 'phone_number', 'email']
 
 class RoomForm(ModelForm):
      class Meta:
@@ -46,7 +46,7 @@ class RoomReservationForm(ModelForm):
         return to_date_data
     class Meta:
         model = RoomReservation
-        fields = ['hotel_id', 'customer_id', 'room_id', 'room_number', 'from_date', 'to_date', 'payment_no']
+        fields = ['hotel_id', 'customer_id', 'room_id', 'room_number', 'from_date', 'to_date', 'number_of_adults', 'number_of_children', 'payment_no']
 
 class RoomServiceForm(ModelForm):
     class Meta:
@@ -56,9 +56,9 @@ class RoomServiceForm(ModelForm):
 class RoomChargesForm(ModelForm):
     class Meta:
         model = RoomCharges
-        fields = ['reservation_id', 'service_id', 'description']
+        fields = ['reservation_id', 'service_id', 'description', 'discount_code', 'discount_price']
 
 class  RoomBillingForm(ModelForm):
     class Meta:
         model =  RoomBilling
-        fields = ['customer_id', 'room_charge_id', 'billing_address1', 'billing_address2', 'county', 'postal_code', 'country', 'total_invoice']
+        fields = ['customer_id', 'room_charge_id', 'invoice_no', 'billing_address1', 'billing_address2', 'county', 'postal_code', 'country', 'total_discounts', 'total_invoice']

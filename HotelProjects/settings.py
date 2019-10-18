@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'crispy_forms',
-    'rest_framework',
+#    'rest_framework.authentication',
     'HotelsApp',
     'HotelsAppCRUD',
 ]
@@ -73,7 +73,15 @@ TEMPLATES = [
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+LOGIN_REDIRECT_URL = 'HotelsApp:CustomLoginView'
+
 WSGI_APPLICATION = 'HotelProjects.wsgi.application'
+
+#REST_FRAMEWORK = { 'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework.authentication.SessionAuthentication'),
+#                   'DEFAULT_PERMISSION_CLASSES': ('rest.framework.permissions.IsAuthenticated'),
+#
+#}
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
