@@ -6,7 +6,14 @@ from HotelsApp.views import *
 
 app_name = "HotelsApp"
 urlpatterns = [
-    url(r'^$', views.HotelsApp, name='HotelsApp'),
+    url(r'^$', views.index, name='index'),
+    path('about/', views.about, name='about'),
+    path('accommodation/', views.accomodation, name='accommodation'),
+    path('blog/', views.blog, name='blog'),
+    path('blogsingle/', views.blogsingle, name='blogsingle'),
+    path('contact/', views.contact, name='contact'),
+    path('elements/', views.elements, name='elements'),
+    path('gallery/', views.gallery, name='gallery'),
     url(r'^login/$', CustomLoginView.as_view(), name='CustomLoginView'),
     path('accounts/user_profile/', views.user_profile, name='user_profile'),
     path('accounts/logout', views.logout, name='logout'),
