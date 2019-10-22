@@ -29,28 +29,32 @@ class Hotel(models.Model):
         return reverse('HotelsAppCRUD:hotel_index')
 
 
-ROOM_TYPE = (
-              ('D', 'Double Deluxe Room'),
-              ('S', 'Single Deluxe Room'),
-              ('H', 'Honey Moon Suite'),
-              ('E', 'Economy Double'),
-            )
-
-
-TYPE_RESRV_ROOM = (
-                    ('P', 'Package Deal'),
-                    ('O', 'One Time Reservation'),
-                    ('M', 'Membership Deal'),
-                    ('C', 'Concierge Reservation'),
-                   )
-
-
 class Room(models.Model):
+    DOUBLE_DELX = 'D'
+    SINGLE = 'S'
+    HONEYMN = 'H'
+    ECONOMY = 'E'
+    ROOM_TYPE = (
+        (DOUBLE_DELX, 'Double Deluxe Room'),
+        (SINGLE, 'Single Deluxe Room'),
+        (HONEYMN, 'Honey Moon Suite'),
+        (ECONOMY, 'Economy Double'),
+    )
+    PACKAGE_DEAL = 'P'
+    ONE_TIME_RSRV = 'O'
+    MEMBERSHIP_DL = 'M'
+    CONCIERGE_RSRV = 'C'
+    TYPE_RESRV_ROOM = (
+        (PACKAGE_DEAL, 'Package Deal'),
+        (ONE_TIME_RSRV, 'One Time Reservation'),
+        (MEMBERSHIP_DL, 'Membership Deal'),
+        (CONCIERGE_RSRV, 'Concierge Reservation'),
+    )
     room_id = models.AutoField(primary_key=True)
     hotel_id = models.ForeignKey(Hotel, on_delete=models.CASCADE)
     room_number = models.IntegerField()
-    room_type = models.CharField(max_length=60, choices=ROOM_TYPE, default='Economy Double')
-    type = models.CharField(max_length=120, choices=TYPE_RESRV_ROOM, default='One Time Reservation')
+    room_type = models.CharField(max_length=60, choices=ROOM_TYPE, default=ECONOMY)
+    type = models.CharField(max_length=120, choices=TYPE_RESRV_ROOM, default=ONE_TIME_RSRV)
     beds = models.IntegerField()
     max_occupancy = models.IntegerField()
     cost_per_night = models.IntegerField()
