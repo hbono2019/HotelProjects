@@ -38,9 +38,45 @@
 {% block content %}
 <form action="" method="POST">
 {% csrf_token %}
-{{ form|crispy }}
-<button type="submit" class="btn btn-success">Save Hotel</button>
-</form>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-row">
+      <div class="form-group col-md-6 mb-0">
+        {{ form.name|as_crispy_field }}
+      </div>
+    </div>
+    <div class="form-row">
+     <div class="form-group col-md-6 mb-0">
+        {{ form.description|as_crispy_field }}
+     </div>
+     <div class="form-group col-md-6 mb-0">
+        {{ form.star_rating|as_crispy_field }}
+     </div>
+	</div>
+	 {{ form.address1|as_crispy_field }}
+	 {{ form.address2|as_crispy_field }}
+	<div class="form-row">
+      <div class="form-group col-md-4 mb-0">
+        {{ form.county|as_crispy_field }}
+      </div>
+	  <div class="form-group col-md-4 mb-0">
+        {{ form.postal_code|as_crispy_field }}
+      </div>
+	  <div class="form-group col-md-4 mb-0">
+        {{ form.country|as_crispy_field }}
+      </div>
+	</div>
+	<div class="form-row">
+      <div class="form-group col-md-4 mb-0">
+        {{ form.latitude|as_crispy_field }}
+      </div>
+	  <div class="form-group col-md-4 mb-0">
+        {{ form.longitude|as_crispy_field }}
+      </div>
+	</div>
+        <button type="submit" class="btn btn-success">Save Hotel<span class="lnr lnr-arrow-right"></span></button>
+        <a href="{% url 'HotelsAppCRUD:hotel_index' %}" class="btn btn-info" type="button">Cancel<span class="lnr lnr-arrow-right"></span></a>
+  </form>
 {% endblock %}
         <!--================ start footer Area  =================-->
         <footer class="footer-area section_gap">

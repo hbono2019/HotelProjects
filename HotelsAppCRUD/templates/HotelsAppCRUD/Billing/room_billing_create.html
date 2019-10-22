@@ -37,9 +37,43 @@
 {% block content %}
 <form action="" method="POST">
 {% csrf_token %}
-{{ form|crispy }}
-<button type="submit" class="btn btn-success">Save Room Billing</button>
-</form>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-row">
+     <div class="form-group col-md-6 mb-0">
+        {{ form.customer_id|as_crispy_field }}
+     </div>
+     <div class="form-group col-md-6 mb-0">
+        {{ form.room_charge_id|as_crispy_field }}
+     </div>
+	 <div class="form-group col-md-6 mb-0">
+        {{ form.invoice_no|as_crispy_field }}
+     </div>
+	</div>
+	{{ form.billing_address1|as_crispy_field }}
+	{{ form.billing_address2|as_crispy_field }}
+	<div class="form-row">
+      <div class="form-group col-md-6 mb-0">
+        {{ form.county|as_crispy_field }}
+      </div>
+	  <div class="form-group col-md-6 mb-0">
+        {{ form.postal_code|as_crispy_field }}
+      </div>
+	  <div class="form-group col-md-6 mb-0">
+        {{ form.country|as_crispy_field }}
+      </div>
+	</div>
+	<div class="form-row">
+      <div class="form-group col-md-6 mb-0">
+        {{ form.total_discounts|as_crispy_field }}
+      </div>
+	  <div class="form-group col-md-6 mb-0">
+        {{ form.total_invoice|as_crispy_field }}
+	  </div>
+    </div>
+        <button type="submit" class="btn btn-success">Save Room Billing<span class="lnr lnr-arrow-right"></span></button>
+        <a href="{% url 'HotelsAppCRUD:rooms_billing_index' %}" class="btn btn-info" type="button">Cancel<span class="lnr lnr-arrow-right"></span></a>
+  </form>
 {% endblock %}
          <!--================ start footer Area  =================-->
         <footer class="footer-area section_gap">
