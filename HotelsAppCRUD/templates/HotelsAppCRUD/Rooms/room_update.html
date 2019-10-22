@@ -20,6 +20,20 @@
     <title>Room Update</title>
 </head>
 <body>
+       <!--================Breadcrumb Area =================-->
+        <section class="breadcrumb_area blog_banner_two">
+            <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+            <div class="container">
+                <div class="page-cover text-center">
+                    <h2 class="page-cover-tittle f_48">Hotels Application Maintenance Database</h2>
+                    <ol class="breadcrumb">
+                        <li><a href="{% url 'HotelsAppCRUD:room_index' %}">Home</a></li>
+                        <li class="active">Room Update</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+        <!--================Breadcrumb Area =================-->
 {% load crispy_forms_tags %}
 {% block content %}
 <form action="" method="POST">

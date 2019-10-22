@@ -17,10 +17,23 @@
         <!-- main css -->
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
-    <title>Hotels Maintenance Database</title>
+    <title>Hotels Maintenance Index</title>
 </head>
 <body>
-<p>Hotels Maintenance Application</p>
+       <!--================Breadcrumb Area =================-->
+        <section class="breadcrumb_area blog_banner_two">
+            <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+            <div class="container">
+                <div class="page-cover text-center">
+                    <h2 class="page-cover-tittle f_48">Hotels Application Maintenance Database</h2>
+                    <ol class="breadcrumb">
+                        <li><a href="{% url 'HotelsAppCRUD:index' %}">Home</a></li>
+                        <li class="active">Hotels Maintenance Index</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+        <!--================Breadcrumb Area =================-->
 <table class="table table-hover">
   <thead>
     <tr>
