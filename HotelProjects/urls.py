@@ -20,5 +20,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url('', include('HotelsApp.urls')),
-    url(r'^HotelsAppCRUD/', include('HotelsAppCRUD.urls', namespace='HotelsAppCRUD')),
+    url(r'^HotelsAppCRUD/', include('HotelsAppCRUD.urls')),
 ]
