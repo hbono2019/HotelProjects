@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'crispy_forms',
-#    'rest_framework.authentication',
+    #    'rest_framework.authentication',
     'HotelsApp',
     'HotelsAppCRUD',
 ]
@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'HotelProjects.urls'
@@ -78,10 +79,10 @@ LOGIN_REDIRECT_URL = 'HotelsApp:CustomLoginView'
 
 WSGI_APPLICATION = 'HotelProjects.wsgi.application'
 
-#REST_FRAMEWORK = { 'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework.authentication.SessionAuthentication'),
+# REST_FRAMEWORK = { 'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework.authentication.SessionAuthentication'),
 #                   'DEFAULT_PERMISSION_CLASSES': ('rest.framework.permissions.IsAuthenticated'),
 #
-#}
+# }
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -136,12 +137,20 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-
+# The absolute path to the directory where collectstatic will collect static files for deployment.
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-
     os.path.join(BASE_DIR, "static"),
     '/static/css/',
 ]
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+# Heroku: Update database configuration from $DATABASE_URL.
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
