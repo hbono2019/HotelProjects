@@ -36,10 +36,9 @@
         <!--================Breadcrumb Area =================-->
 {% load crispy_forms_tags %}
 {% block content %}
+<div class="container-fluid">
 <form action="" method="POST">
 {% csrf_token %}
-  <form method="post">
-    {% csrf_token %}
     <div class="form-row">
      <div class="form-group col-md-6 mb-0">
         {{ form.customer_id|as_crispy_field }}
@@ -75,6 +74,7 @@
         <button type="submit" class="btn btn-success">Save Room Billing<span class="lnr lnr-arrow-right"></span></button>
         <a href="{% url 'HotelsAppCRUD:rooms_billing_index' %}" class="btn btn-info" type="button">Cancel<span class="lnr lnr-arrow-right"></span></a>
   </form>
+</div>
 {% endblock %}
          <!--================ start footer Area  =================-->
         <footer class="footer-area section_gap">

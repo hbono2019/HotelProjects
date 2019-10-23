@@ -50,7 +50,7 @@
            <th scope="row">{{ reservation.reservation_id}} {{ reservation.room_number}}</th>
                <td> <a href="{% url 'HotelsAppCRUD:rooms_reservation_detail' pk=reservation.reservation_id %}" class="btn btn-info" role="button">Detail</a> </td>
                <td> <a href="{% url 'HotelsAppCRUD:rooms_reservation_update' pk=reservation.reservation_id %}" class="btn btn-info" role="button">Update</a> </td>
-               <td> <a href="{% url 'HotelsAppCRUD:rooms_reservation_delete' pk=reservation.reservation_id %}" class="btn btn-info" role="button">Delete</a> </td>
+               <td> <a href="{% url 'HotelsAppCRUD:rooms_reservation_delete' pk=reservation.reservation_id %}" class="btn btn-info" role="button">Delete<span class="glyphicon glyphicon-trash"></span> </a> </td>
         </tr>
        {% endfor %}
       </tbody>
