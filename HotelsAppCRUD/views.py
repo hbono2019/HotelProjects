@@ -44,6 +44,10 @@ def RoomsReservation(request):
     return render(request, "HotelsAppCRUD/Reservation/index.html", data)
 
 
+def RoomsReservationPub(request):
+    data = {}
+    return render(request, "HotelsAppCRUD/Reservation/index_pub.html", data)
+
 def RoomsService(request):
     data = {}
     return render(request, "HotelsAppCRUD/Service/index.html", data)
@@ -238,8 +242,32 @@ class RoomReservationCreate(CreateView):
             return render(request, template_name, context)
 
 
+class RoomReservationPubCreate(CreateView):
+    template_name = "HotelsAppCRUD/Reservation/room_reservation_public_create.html"
+    form_class = RoomReservationForm
+    def create_reservation(request):
+        if request.method == "POST":
+            form=RoomReservationForm(request.POST)
+            if form.is_valid():
+               reservation_item = form.save(commit=False)
+               reservation_item.save()
+               return redirect('/Hotels/'+ str(reservation_item.id)+ '/')
+        else:
+            form =RoomReservationForm()
+            context = {'form': form}
+            return render(request, template_name, context)
+
+
 class RoomReservationList(ListView):
     template_name = "HotelsAppCRUD/Reservation/room_reservation_list.html"
+    model = RoomReservation
+    context_object_name = 'reservation_list'
+    queryset = RoomReservation.objects.all()
+    paginate_by = 10
+    ordering = ['-reservation_id']
+
+class RoomReservationPubList(ListView):
+    template_name = "HotelsAppCRUD/Reservation/room_reservation_public_list.html"
     model = RoomReservation
     context_object_name = 'reservation_list'
     queryset = RoomReservation.objects.all()
@@ -249,6 +277,11 @@ class RoomReservationList(ListView):
 
 class RoomReservationDetail(DetailView):
     template_name = "HotelsAppCRUD/Reservation/room_reservation_detail.html"
+    model = RoomReservation
+
+
+class RoomReservationPubDetail(DetailView):
+    template_name = "HotelsAppCRUD/Reservation/room_reservation_public_detail.html"
     model = RoomReservation
 
 
@@ -264,7 +297,22 @@ class RoomReservationUpdate(UpdateView):
             reservation_item.save()
             return redirect('/Hotels/' + str(reservation_item.id) + '/')
         context = {'form': form}
-        return render(request, 'HotelsAppCRUD/Reservation/index.html', context)
+        return render(request, template_name, context)
+
+
+class RoomReservationPubUpdate(UpdateView):
+    template_name = "HotelsAppCRUD/Reservation/room_reservation_public_update.html"
+    form_class = RoomReservationForm
+    model = RoomReservation
+    def update_reservation(request, id=None):
+        item = get_object_or_404(Hotel, id=id)
+        form = RoomReservationForm(request.POST or None, instance=item)
+        if form.is_valid():
+            reservation_item = form.save(commit=False)
+            reservation_item.save()
+            return redirect('/Hotels/' + str(reservation_item.id) + '/')
+        context = {'form': form}
+        return render(request, template_name, context)
 
 
 class RoomReservationDelete(DeleteView):
@@ -378,7 +426,7 @@ class RoomChargesUpdate(UpdateView):
             charge_item.save()
             return redirect('/Hotels/' + str(charge_item.id) + '/')
         context = {'form': form}
-        return render(request, 'HotelsAppCRUD/Charge/index.html', context)
+        return render(request, template_name, context)
 
 
 class RoomChargesDelete(DeleteView):
