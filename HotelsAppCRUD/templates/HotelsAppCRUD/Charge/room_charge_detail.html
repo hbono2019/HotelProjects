@@ -21,10 +21,12 @@
 </head>
 <body>
 {% block content %}
+<div class="container-fluid">
   <h1>Room Charge Id: {{ roomcharges.room_charge_id }}</h1>
   <p><strong>Reservation Id:</strong> {{ roomcharges.reservation_id }}</p>
   <p><strong>Service Id:</strong> {{ roomcharges.service_id }}</p>
   <p><strong>description:</strong> {{ roomcharges.description }}</p>
+</div>
 {% endblock %}
          <!--================ start footer Area  =================-->
         <footer class="footer-area section_gap">

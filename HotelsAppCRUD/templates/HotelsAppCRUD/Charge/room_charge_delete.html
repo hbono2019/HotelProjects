@@ -35,11 +35,13 @@
         </section>
         <!--================Breadcrumb Area =================-->
  {% block content %}
+<div class="container-fluid">
 <form action="" method="POST">
     {% csrf_token %}
     <h1>Confirm Delete the following "{{ object.room_charge_id }} {{ object.description }}"</h1>
     <p><input type='Submit' value='Yes'/><a href="../"> Cancel</a></p>
 </form>
+</div>
 {% endblock %}
         <!--================ start footer Area  =================-->
         <footer class="footer-area section_gap">

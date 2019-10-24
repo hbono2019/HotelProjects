@@ -35,6 +35,7 @@
         </section>
         <!--================Breadcrumb Area =================-->
 {% block content %}
+<div class="container-fluid">
   <h1>Room Billing Id: {{ roombilling.reservation_id }}</h1>
   <p><strong>Customer Id:</strong> {{ roombilling.customer_id }}</p>
   <p><strong>Room Charge Id:</strong> {{ roombilling.room_charge_id }}</p>
@@ -44,6 +45,7 @@
   <p><strong>Postal Code:</strong> {{ roombilling.postal_code }}</p>
   <p><strong>Country:</strong> {{ roombilling.country }}</p>
   <p><strong>Total Invoice:</strong> {{ roombilling.total_invoice }}</p>
+</div>
 {% endblock %}
          <!--================ start footer Area  =================-->
         <footer class="footer-area section_gap">

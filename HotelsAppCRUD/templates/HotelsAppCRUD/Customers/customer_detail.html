@@ -35,11 +35,13 @@
         </section>
         <!--================Breadcrumb Area =================-->
 {% block content %}
+<div class="container-fluid">
   <h1>Customer Id: {{ customer.customer_id }}</h1>
   <p><strong>Name:</strong> {{ customer.name }}</p>
   <p><strong>Credit Card No:</strong> {{ customer.credit_card_no }}</p>
   <p><strong>Phone No:</strong> {{ customer.phone_number }}</p>
   <p><strong>Email:</strong> {{ customer.email }}</p>
+</div>
 {% endblock %}
         <!--================ start footer Area  =================-->
         <footer class="footer-area section_gap">

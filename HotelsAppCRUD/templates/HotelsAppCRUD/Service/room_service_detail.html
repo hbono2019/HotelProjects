@@ -34,11 +34,12 @@
             </div>
         </section>
         <!--================Breadcrumb Area =================-->
-
 {% block content %}
+<div class="container-fluid">
   <h1>Service Id: {{ roomservice.service_id }}</h1>
   <p><strong>Service Description:</strong> {{ roomservice.service_description }}</p>
   <p><strong>Service Price:</strong> {{ roomservice.service_price }}</p>
+</div>
 {% endblock %}
         <!--================ start footer Area  =================-->
         <footer class="footer-area section_gap">

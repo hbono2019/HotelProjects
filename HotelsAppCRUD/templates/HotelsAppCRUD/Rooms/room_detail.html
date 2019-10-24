@@ -35,6 +35,7 @@
         </section>
         <!--================Breadcrumb Area =================-->
 {% block content %}
+<div class="container-fluid">
   <h1>Room Id: {{ room.room_id }}</h1>
   <p><strong>Hotel Id:</strong> {{ room.hotel_id }}</p>
   <p><strong>Room Number:</strong> {{ room.room_number }}</p>
@@ -43,6 +44,7 @@
   <p><strong>Beds:</strong> {{ room.beds }}</p>
   <p><strong>Max Occupancy:</strong> {{ room.max_occupancy }}</p>
   <p><strong>Cost per Night:</strong> {{ room.cost_per_night }}</p>
+</div>
 {% endblock %}
         <!--================ start footer Area  =================-->
         <footer class="footer-area section_gap">

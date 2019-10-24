@@ -35,6 +35,7 @@
         </section>
         <!--================Breadcrumb Area =================-->
 {% block content %}
+<div class="container-fluid">
   <h1>Hotel: {{ hotel.name }}</h1>
   <p><strong>Description:</strong> {{ hotel.description }}</p>
   <p><strong>Star Rating:</strong> {{ hotel.star_rating }}</p>
@@ -45,6 +46,7 @@
   <p><strong>Country:</strong> {{ hotel.country }}</p>
   <p><strong>Latitude:</strong> {{ hotel.latitude }}</p>
   <p><strong>Longitude:</strong> {{ hotel.longitude }}</p>
+</div>
 {% endblock %}
         <!--================ start footer Area  =================-->
         <footer class="footer-area section_gap">

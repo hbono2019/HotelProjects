@@ -36,6 +36,7 @@
         <!--================Breadcrumb Area =================-->
 {% block content %}
   <h1>Reservation List</h1>
+<div class="container-fluid">
   {% if reservation_list %}
    <table class="table table-hover">
       <thead>
@@ -50,6 +51,25 @@
            <th scope="row">{{ reservation.reservation_id}} {{ reservation.room_number}}</th>
                <td> <a href="{% url 'HotelsAppCRUD:rooms_reservation_public_detail' pk=reservation.reservation_id %}" class="btn btn-info" role="button">Detail</a> </td>
                <td> <a href="{% url 'HotelsAppCRUD:rooms_reservation_public_update' pk=reservation.reservation_id %}" class="btn btn-info" role="button">Update</a> </td>
+               <td>
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#DeleteModal">Cancel Reservation<span class="glyphicon glyphicon-trash"></span></button>
+                  <div class="modal fade" id="DeleteModal" role="dialog">
+                      <div class="modal-dialog">
+                          <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                          <h4 class="modal-title">Cancel Room Booking</h4>
+                                </div>
+                                <div class="modal-body">
+                                     <p>Please Contact our Customer Service (0818) 123 456</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                          </div>
+                 </div>
+                </div>
+              </td>
         </tr>
        {% endfor %}
       </tbody>
@@ -57,6 +77,7 @@
   {% else %}
      <p>There are no Reservation in the database.</p>
   {% endif %}
+</div>
 {% endblock %}
         <!--================ start footer Area  =================-->
         <footer class="footer-area section_gap">

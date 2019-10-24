@@ -35,6 +35,7 @@
         </section>
         <!--================Breadcrumb Area =================-->
 {% block content %}
+<div class="container-fluid">
   <h1>Reservation Id: {{ roomreservation.reservation_id }}</h1>
   <p><strong>Hotel Id:</strong> {{ roomreservation.hotel_id }}</p>
   <p><strong>Customer Id:</strong> {{ roomreservation.customer_id }}</p>
@@ -43,6 +44,7 @@
   <p><strong>From Date:</strong> {{ roomreservation.from_date }}</p>
   <p><strong>To Date:</strong> {{ roomreservation.to_date }}</p>
   <p><strong>Payment No:</strong> {{ roomreservation.payment_no }}</p>
+</div>
 {% endblock %}
        <!--================ start footer Area  =================-->
         <footer class="footer-area section_gap">
