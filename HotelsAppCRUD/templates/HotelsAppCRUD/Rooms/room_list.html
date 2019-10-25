@@ -52,9 +52,9 @@
        {% for room in room_list %}
         <tr>
            <th scope="row">{{ room.room_id }}</th>
-               <td> <a href="{% url 'HotelsAppCRUD:room_detail' pk=room.room_id %}" class="btn btn-info" role="button">Detail</a> </td>
-               <td> <a href="{% url 'HotelsAppCRUD:room_update' pk=room.room_id %}" class="btn btn-info" role="button">Update</a> </td>
-               <td> <a href="{% url 'HotelsAppCRUD:room_delete' pk=room.room_id %}" class="btn btn-info" role="button">Delete<span class="glyphicon glyphicon-trash"></span> </a> </td>
+               <td> <a href="{% url 'HotelsAppCRUD:room_detail' pk=room.room_id %}" class="btn btn-info btn-block" role="button">Detail</a> </td>
+               <td> <a href="{% url 'HotelsAppCRUD:room_update' pk=room.room_id %}" class="btn btn-info btn-block" role="button">Update</a> </td>
+               <td> <a href="{% url 'HotelsAppCRUD:room_delete' pk=room.room_id %}" class="btn btn-info btn-block" role="button">Delete<span class="glyphicon glyphicon-trash"></span> </a> </td>
         </tr>
        {% endfor %}
       </tbody>
