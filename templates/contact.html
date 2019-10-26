@@ -18,6 +18,13 @@
         <!-- main css -->
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+        <style>
+         /* Set the size of the div element that contains the map */
+         #map {
+          height: 400px;  /* The height is 400 pixels */
+          width: 100%;  /* The width is the width of the web page */
+              }
+        </style>
     </head>
     <body>
         <!--================Header Area =================-->
@@ -72,14 +79,18 @@
         <!--================Contact Area =================-->
         <section class="contact_area section_gap">
             <div class="container">
-                <div id="mapBox" class="mapBox"
-                    data-lat="53.3482125"
-                    data-lon="-6.3356914"
-                    data-zoom="13"
-                    data-info="8 Golden Ln, Dublin, D08 VRR7"
-                    data-mlat="53.3482125"
-                    data-mlon="-6.3356914">
-                </div>
+                   <div id="map"></div>
+                       <script>
+                            // Initialize and add the map
+                            function initMap()
+                            {
+                              // The location of Royal Hotel
+                              var Royal = {lat: 53.3405141, lng: -6.2692982};
+                              var map = new google.maps.Map(
+                                  document.getElementById('map'), {zoom: 18, center: Royal});
+                              var marker = new google.maps.Marker({position: Royal, map: map});
+                            }
+                       </script>
                 <div class="row">
                     <div class="col-md-3">
                         <div class="contact_info">
@@ -258,7 +269,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         <script src="{% static 'vendors/lightbox/simpleLightbox.min.js' %}"></script>
         <script src="{% static 'js/custom.js' %}"></script>
         <!--gmaps Js-->
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7ilxgpktUWrY4K2Ax-xBmn45MMZvhdFA&libraries=places"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7ilxgpktUWrY4K2Ax-xBmn45MMZvhdFA&callback=initMap"></script>
         <script src="{% static 'js/gmaps.min.js' %}"></script>
         <!-- contact js -->
         <script src="{% static 'js/jquery.form.js' %}"></script>
