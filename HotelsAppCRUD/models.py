@@ -57,7 +57,7 @@ class Room(models.Model):
     type = models.CharField(max_length=120, choices=TYPE_RESRV_ROOM, default=ONE_TIME_RSRV)
     beds = models.IntegerField()
     max_occupancy = models.IntegerField()
-    cost_per_night =models.DecimalField(max_digits=5, decimal_places=2)
+    cost_per_night =models.DecimalField(max_digits=6, decimal_places=2)
     def get_absolute_url(self):
         return reverse('HotelsAppCRUD:room_index')
 
