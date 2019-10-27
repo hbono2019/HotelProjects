@@ -51,7 +51,7 @@
       <tbody>
        {% for reservation in reservation_list %}
         <tr>
-           <th scope="row">{{ reservation.reservation_id}} {{ reservation.room_number}}</th>
+           <th scope="row">{{ reservation.reservation_id}} {{ reservation.customer_id}} {{ reservation.room_number}}</th>
                <td> <a href="{% url 'HotelsAppCRUD:rooms_reservation_detail' pk=reservation.reservation_id %}" class="btn btn-info btn-block" role="button">Detail</a> </td>
                <td> <a href="{% url 'HotelsAppCRUD:rooms_reservation_update' pk=reservation.reservation_id %}" class="btn btn-info btn-block" role="button">Update</a> </td>
                <td> <a href="{% url 'HotelsAppCRUD:rooms_reservation_delete' pk=reservation.reservation_id %}" class="btn btn-info btn-block" role="button">Delete<span class="glyphicon glyphicon-trash"></span> </a> </td>

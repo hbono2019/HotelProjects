@@ -50,7 +50,7 @@
       <tbody>
        {% for charges in charges_list %}
         <tr>
-           <th scope="row">{{charges.room_charge_id}}</th>
+           <th scope="row">{{charges.room_charge_id}} {{charges.description}}</th>
                <td> <a href="{% url 'HotelsAppCRUD:rooms_charge_detail' pk=charges.room_charge_id %}" class="btn btn-info btn-block" role="button">Detail</a> </td>
                <td> <a href="{% url 'HotelsAppCRUD:rooms_charge_update' pk=charges.room_charge_id %}" class="btn btn-info btn-block" role="button">Update</a> </td>
                <td> <a href="{% url 'HotelsAppCRUD:rooms_charge_delete' pk=charges.room_charge_id %}" class="btn btn-info btn-block" role="button">Delete<span class="glyphicon glyphicon-trash"></span> </a> </td>
