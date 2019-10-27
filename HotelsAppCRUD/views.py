@@ -375,7 +375,7 @@ class RoomServiceUpdate(UpdateView):
 
 class RoomServiceDelete(DeleteView):
       model = RoomService
-      success_url = reverse_lazy('HotelsAppCRUD:service_index')
+      success_url = reverse_lazy('HotelsAppCRUD:rooms_service_index')
       template_name = 'HotelsAppCRUD/Service/room_service_delete.html'
       def confirm_delete(request, id=None):
           obj = get_object_or_404(RoomService, id=id)
@@ -432,7 +432,7 @@ class RoomChargesUpdate(UpdateView):
 
 class RoomChargesDelete(DeleteView):
     model = RoomCharges
-    success_url = reverse_lazy('HotelsAppCRUD:charge_index')
+    success_url = reverse_lazy('HotelsAppCRUD:rooms_charge_index')
     template_name = 'HotelsAppCRUD/Charge/room_charge_delete.html'
     def confirm_delete(request, id=None):
         obj = get_object_or_404(RoomCharges, id=id)
@@ -489,7 +489,7 @@ class RoomBillingUpdate(UpdateView):
 
 class RoomBillingDelete(DeleteView):
     model = RoomBilling
-    success_url = reverse_lazy('HotelsAppCRUD:billing_index')
+    success_url = reverse_lazy('HotelsAppCRUD:rooms_billing_index')
     template_name = 'HotelsAppCRUD/Billing/room_billing_delete.html'
     def confirm_delete(request, id=None):
         obj = get_object_or_404(RoomBilling, id=id)
