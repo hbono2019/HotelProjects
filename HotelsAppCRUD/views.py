@@ -87,6 +87,7 @@ class CustomerDetail(DetailView):
 class CustomerUpdate(UpdateView):
     template_name = "HotelsAppCRUD/Customers/customer_update.html"
     form_class = CustomerForm
+    model = Customer
     def update_customer(request, id=None):
         item = get_object_or_404(Hotel, id=id)
         form = HotelForm(request.POST or None, instance=item)
