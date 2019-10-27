@@ -51,7 +51,7 @@
       <tbody>
        {% for billing in billing_list %}
         <tr>
-           <th scope="row">{{billing.reservation_id}} {{billing.reservation_id}} {{ billing.invoice_no}}</th>
+           <th scope="row">{{billing.reservation_id}} {{billing.customer_id}} {{ billing.invoice_no}}</th>
                <td> <a href="{% url 'HotelsAppCRUD:room_billing_detail' pk=billing.reservation_id %}" class="btn btn-info btn-block" role="button">Detail</a> </td>
                <td> <a href="{% url 'HotelsAppCRUD:room_billing_update' pk=billing.reservation_id %}" class="btn btn-info btn-block" role="button">Update</a> </td>
                <td> <a href="{% url 'HotelsAppCRUD:room_billing_delete' pk=billing.reservation_id %}" class="btn btn-info btn-block" role="button">Delete<span class="glyphicon glyphicon-trash"></span> </a> </td>

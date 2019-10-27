@@ -461,7 +461,7 @@ class RoomBillingCreate(CreateView):
 class RoomBillingList(ListView):
     template_name = "HotelsAppCRUD/Billing/room_billing_list.html"
     model = RoomBilling
-    context_object_name = 'charges_list'
+    context_object_name = 'billing_list'
     queryset = RoomBilling.objects.all()
     paginate_by = 10
     ordering = ['-reservation_id']
