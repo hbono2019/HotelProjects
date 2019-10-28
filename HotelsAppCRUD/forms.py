@@ -32,8 +32,8 @@ class RoomReservationForm(ModelForm):
         fields = ['hotel_id', 'customer_id', 'room_id', 'room_number', 'from_date', 'to_date', 'number_of_adults',
                   'number_of_children', 'payment_no']
         widgets = {
-          'from_date': DateInput(format='%m/%d/%Y', attrs={'class': "input", 'placeholder': "mm/dd/yyyy", 'data-mask': "##/##/####"}),
-          'to_date':  DateInput(format='%m/%d/%Y', attrs={'class': "input", 'placeholder': "mm/dd/yyyy", 'data-mask': "##/##/####"}),
+          'from_date': DateInput(format='%m/%d/%Y', attrs={'class': "input", 'placeholder': "MM/dd/YYYY", 'data-mask': "##/##/####"}),
+          'to_date':  DateInput(format='%m/%d/%Y', attrs={'class': "input", 'placeholder': "MM/dd/YYYY", 'data-mask': "##/##/####"}),
         }
 
 

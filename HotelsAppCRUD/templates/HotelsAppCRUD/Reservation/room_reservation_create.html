@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
         {% load static %}
         <link rel="icon" href="{% static 'image/favicon.png' %}" type="image/png">
         <title>Royal Hotel</title>
@@ -34,6 +36,21 @@
             </div>
         </section>
         <!--================Breadcrumb Area =================-->
+        <script type="text/javascript">
+            $(function () {
+                $('#id_from_date').datetimepicker({
+                    format: 'mm/dd/yyyy'
+                    });
+               });
+        </script>
+        <script type="text/javascript">
+            $(function () {
+                $('#id_to_date').datetimepicker({
+                    format: 'mm/dd/yyyy'
+                 });
+             });
+
+        </script>
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container-fluid">
@@ -57,7 +74,7 @@
 	  <div class="form-group col-md-6 mb-0">
         {{ form.from_date|as_crispy_field }}
       </div>
-	  <div class="form-group col-md-6 mb-0">
+      <div class="form-group col-md-6 mb-0">
         {{ form.to_date|as_crispy_field }}
       </div>
 	</div>
