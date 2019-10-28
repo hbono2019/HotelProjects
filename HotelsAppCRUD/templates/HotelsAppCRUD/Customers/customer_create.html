@@ -36,6 +36,27 @@
             </div>
         </section>
         <!--================Breadcrumb Area =================-->
+     <script type="text/javascript">
+       function card_mask(value) {
+       var v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
+       var v_chunk = v.match(/\d{4,16}/g);
+       var v_str = v_chunk && v_chunk[0] || ''
+       var cc_res = []
+       for (i=0, len=v_str.length; i<len; i+=4) {
+           cc_res.push(v_str.substring(i, i+4))
+           }
+       if (cc_res.length) {
+           return cc_res.join('-')
+          } else {
+                return value
+           }
+       }
+	       onload = function(){
+	       document.getElementById('id_credit_card_no').oninput = function(){
+	       this.value = card_mask(this.value)
+	       }
+	   }
+        </script>
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container-fluid">
