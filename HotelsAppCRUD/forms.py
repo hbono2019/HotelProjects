@@ -17,6 +17,7 @@ class CustomerForm(ModelForm):
         fields = ['name', 'credit_card_no', 'phone_number', 'email']
         widgets = {
             'credit_card_no': TextInput(attrs={'class': "input", 'placeholder': "0000-0000-0000-0000", 'data-mask': "####-####-####-####"}),
+            'phone_number': TextInput(attrs={'class': "input", 'placeholder': "+999 99 999 9999", 'data-mask': "+###-##-###-####"}),
            }
 
 
