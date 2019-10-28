@@ -22,7 +22,7 @@ class Hotel(models.Model):
     address2 = models.CharField(max_length=120, blank=True, null=True)
     county = models.CharField(max_length=120)
     postal_code = models.CharField(max_length=20)
-    country =  models.CharField(max_length=120)
+    country = models.CharField(max_length=120)
     latitude = models.DecimalField(max_digits=9, decimal_places=7)
     longitude = models.DecimalField(max_digits=9, decimal_places=7)
     def get_absolute_url(self):
@@ -57,7 +57,7 @@ class Room(models.Model):
     type = models.CharField(max_length=120, choices=TYPE_RESRV_ROOM, default=ONE_TIME_RSRV)
     beds = models.IntegerField()
     max_occupancy = models.IntegerField()
-    cost_per_night =models.DecimalField(max_digits=6, decimal_places=2)
+    cost_per_night = models.DecimalField(max_digits=6, decimal_places=2)
     def get_absolute_url(self):
         return reverse('HotelsAppCRUD:room_index')
 
@@ -100,13 +100,13 @@ class RoomBilling(models.Model):
     reservation_id = models.AutoField(primary_key=True)
     customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
     room_charge_id = models.ForeignKey(RoomCharges, on_delete=models.CASCADE)
-    invoice_no = models.CharField(max_length=120,default='')
+    invoice_no = models.CharField(max_length=120, default='')
     billing_address1 = models.CharField(max_length=120)
     billing_address2 = models.CharField(max_length=120, blank=True, null=True)
     county = models.CharField(max_length=120)
     postal_code = models.CharField(max_length=20)
     country = models.CharField(max_length=120)
-    total_discounts = models.DecimalField(max_digits=5, decimal_places=2,default='')
-    total_invoice = models.DecimalField(max_digits=5, decimal_places=2,default='')
+    total_discounts = models.DecimalField(max_digits=5, decimal_places=2, default='')
+    total_invoice = models.DecimalField(max_digits=5, decimal_places=2, default='')
     def get_absolute_url(self):
         return reverse('HotelsAppCRUD:rooms_billing_index')

@@ -1,8 +1,5 @@
-import datetime
-
-from django.core.exceptions import ValidationError
 from django.forms import ModelForm
-from django.utils.translation import ugettext_lazy as _
+from django.forms.widgets import DateInput, TextInput
 
 from .models import *
 
@@ -18,6 +15,9 @@ class CustomerForm(ModelForm):
     class Meta:
         model = Customer
         fields = ['name', 'credit_card_no', 'phone_number', 'email']
+        widgets = {
+            'credit_card_no': TextInput(attrs={'class': "input", 'placeholder': "0000-0000-0000-0000", 'data-mask': "####-####-####-####"}),
+           }
 
 
 class RoomForm(ModelForm):
@@ -27,33 +27,14 @@ class RoomForm(ModelForm):
 
 
 class RoomReservationForm(ModelForm):
-    def clean_from_date(self):
-        from_date_data = self.cleaned_data['from_date']
-
-        # Check if a date is not in the past.
-        if from_date_data < datetime.date.today():
-            raise ValidationError(_('Invalid date - cannot do reservations in the past'))
-        # Check if a date is in the allowed range (+24 weeks from today).
-        if from_date_data > datetime.date.today() + datetime.timedelta(weeks=24):
-            raise ValidationError(_('Invalid date - reservations cannot be more than 24 weeks ahead'))
-        # Remember to always return the cleaned data.
-        return from_date_data
-
-    def clean_to_date(self):
-        to_date_data = self.cleaned_data['to_date']
-        # Check if a date is not in the past.
-        if to_date_data < datetime.date.today():
-            raise ValidationError(_('Invalid date - cannot do reservations in the past'))
-        # Check if a date is in the allowed range (+24 weeks from today).
-        if to_date_data > datetime.date.today() + datetime.timedelta(weeks=24):
-            raise ValidationError(_('Invalid date - reservations cannot be more than 24 weeks ahead'))
-        # Remember to always return the cleaned data.
-        return to_date_data
-
     class Meta:
         model = RoomReservation
         fields = ['hotel_id', 'customer_id', 'room_id', 'room_number', 'from_date', 'to_date', 'number_of_adults',
                   'number_of_children', 'payment_no']
+        widgets = {
+          'from_date': DateInput(format='%m/%d/%Y', attrs={'class': "input", 'placeholder': "mm/dd/yyyy", 'data-mask': "##/##/####"}),
+          'to_date':  DateInput(format='%m/%d/%Y', attrs={'class': "input", 'placeholder': "mm/dd/yyyy", 'data-mask': "##/##/####"}),
+        }
 
 
 class RoomServiceForm(ModelForm):
