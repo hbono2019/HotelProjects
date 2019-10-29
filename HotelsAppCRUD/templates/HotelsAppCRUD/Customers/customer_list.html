@@ -52,6 +52,9 @@
        {% for customer in customer_list %}
         <tr>
            <th scope="row">{{ customer.name}}</th>
+               <td>{{ customer.credit_card_no}}</td>
+               <td>{{ customer.phone_number}}</td>
+               <td>{{ customer.email}}</td>
                <td> <a href="{% url 'HotelsAppCRUD:customer_detail' pk=customer.customer_id %}" class="btn btn-info btn-block" role="button">Detail</a> </td>
                <td> <a href="{% url 'HotelsAppCRUD:customer_update' pk=customer.customer_id %}" class="btn btn-info btn-block" role="button">Update</a> </td>
                <td> <a href="{% url 'HotelsAppCRUD:customer_delete' pk=customer.customer_id %}" class="btn btn-info btn-block" role="button">Delete<span class="glyphicon glyphicon-trash"></span> </a> </td>

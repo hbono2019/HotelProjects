@@ -51,6 +51,15 @@
        {% for hotel in hotel_list %}
         <tr>
            <th scope="row">{{ hotel.name}}</th>
+               <td>{{hotel.description}}</td>
+               <td>{{hotel.star_rating}}</td>
+               <td>{{hotel.address1}}</td>
+               <td>{{ hotel.address2}}</td>
+               <td>{{ hotel.county}}</td>
+               <td>{{ hotel.postal_code}}</td>
+               <td>{{ hotel.country}}</td>
+               <td>{{ hotel.latitude}}</td>
+               <td>{{ hotel.longitude}}</td>
                <td> <a href="{% url 'HotelsAppCRUD:hotel_detail' pk=hotel.hotel_id %}" class="btn btn-info btn-block" role="button">Detail</a> </td>
                <td> <a href="{% url 'HotelsAppCRUD:hotel_update' pk=hotel.hotel_id %}" class="btn btn-info btn-block" role="button">Update</a> </td>
                <td> <a href="{% url 'HotelsAppCRUD:hotel_delete' pk=hotel.hotel_id %}" class="btn btn-info btn-block" role="button">Delete<span class="glyphicon glyphicon-trash"></span></a> </td>

@@ -51,7 +51,9 @@
       <tbody>
        {% for service in service_list %}
         <tr>
-           <th scope="row">{{service.service_id}} {{service.service_description}}</th>
+           <th scope="row">{{service.service_id}}</th>
+               <td>{{service.service_description}}</td>
+               <td>{{service.service_price}}</td>
                <td> <a href="{% url 'HotelsAppCRUD:rooms_service_detail' pk=service.service_id %}" class="btn btn-info btn-block" role="button">Detail</a> </td>
                <td> <a href="{% url 'HotelsAppCRUD:rooms_service_update' pk=service.service_id %}" class="btn btn-info btn-block" role="button">Update</a> </td>
                <td> <a href="{% url 'HotelsAppCRUD:rooms_service_delete' pk=service.service_id %}" class="btn btn-info btn-block" role="button">Delete<span class="glyphicon glyphicon-trash"></span> </a> </td>
