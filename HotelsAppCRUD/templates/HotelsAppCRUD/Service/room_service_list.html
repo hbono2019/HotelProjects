@@ -44,14 +44,15 @@
    <table class="table table-hover">
       <thead>
          <tr>
-           <th scope="col1">Choose option</th>
-           <th scope="col2"></th>
+           <th scope="col1">Service Id</th>
+           <th scope="col2">Room Service Description</th>
+           <th scope="col3">Room Service Price</th>
         </tr>
       </thead>
       <tbody>
        {% for service in service_list %}
         <tr>
-           <th scope="row">{{service.service_id}}</th>
+               <td>{{service.service_id}}</td>
                <td>{{service.service_description}}</td>
                <td>{{service.service_price}}</td>
                <td> <a href="{% url 'HotelsAppCRUD:rooms_service_detail' pk=service.service_id %}" class="btn btn-info btn-block" role="button">Detail</a> </td>

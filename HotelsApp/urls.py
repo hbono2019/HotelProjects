@@ -7,6 +7,8 @@ from HotelsApp.views import *
 app_name = "HotelsApp"
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+
+path('login_index/', views.login_index, name='login_index'),
     path('about/', views.about, name='about'),
     path('accommodation/', views.accomodation, name='accommodation'),
     path('blog/', views.blog, name='blog'),

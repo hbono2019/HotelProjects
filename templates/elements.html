@@ -32,20 +32,13 @@
                     </button>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                          <div class="nav-item "><a class="nav-link" href="{% url 'HotelsApp:login_index' %}">Home</a></div>
                         <ul class="nav navbar-nav menu_nav ml-auto">
-                            <li class="nav-item active"><a class="nav-link" href="{% url 'HotelsApp:index' %}">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'HotelsApp:about' %}">About us</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'HotelsApp:accommodation' %}">Accommodation</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'HotelsApp:gallery' %}">Gallery</a></li>
-                            <li class="nav-item submenu dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'HotelsApp:blog' %}">Blog</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'HotelsApp:blogsingle' %}">Blog Details</a></li>
-                                </ul>
-                            </li>
+
+
                             <li class="nav-item"><a class="nav-link" href="{% url 'HotelsApp:elements' %}">Concierge Hotel Database Admin</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'HotelsApp:contact' %}">Contact</a></li>
+
+                            <li class="nav-item"> <a class="nav-link" href="{% url 'HotelsApp:logout' %}">LogOut</a></li>
                         </ul>
                     </div>
                 </nav>
