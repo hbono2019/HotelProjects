@@ -54,7 +54,12 @@
       function phone_mask(value) {
          var number =  value.replace(/[^\d]/g, '')
          number = number.replace(/(\d{3})(\d{2})(\d{3})(\d{4})/, "+$1 $2 $3 $4")
-         return number
+          if (number.length > 16){
+              number = number.substring(number,16)
+              return number
+          } else  {
+               return number
+          }
        }
 	       onload = function(){
 	            document.getElementById('id_credit_card_no').oninput = function() {
