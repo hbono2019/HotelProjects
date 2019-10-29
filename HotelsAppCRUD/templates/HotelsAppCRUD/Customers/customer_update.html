@@ -36,27 +36,40 @@
             </div>
         </section>
         <!--================Breadcrumb Area =================-->
-    <script type="text/javascript">
+      <script type="text/javascript">
        function card_mask(value) {
        var v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
        var v_chunk = v.match(/\d{4,16}/g);
        var v_str = v_chunk && v_chunk[0] || ''
-       var cc_formatted = []
+       var cc_res = []
        for (i=0, len=v_str.length; i<len; i+=4) {
-           cc_formatted.push(v_str.substring(i, i+4))
+           cc_res.push(v_str.substring(i, i+4))
            }
-       if (cc_formatted.length) {
-           return cc_formatted.join('-')
+       if (cc_res.length) {
+           return cc_res.join('-')
           } else {
                 return value
            }
        }
+      function phone_mask(value) {
+         var number =  value.replace(/[^\d]/g, '')
+         number = number.replace(/(\d{3})(\d{2})(\d{3})(\d{4})/, "+$1 $2 $3 $4")
+          if (number.length > 16){
+              number = number.substring(number,16)
+              return number
+          } else  {
+               return number
+          }
+       }
 	       onload = function(){
-	       document.getElementById('id_credit_card_no').oninput = function(){
-	       this.value = card_mask(this.value)
-	       }
+	            document.getElementById('id_credit_card_no').oninput = function() {
+                this.value = card_mask(this.value)
+                }
+	            document.getElementById('id_phone_number').oninput = function(){
+	            this.value = phone_mask(this.value)
+	            }
 	   }
-        </script>
+      </script>
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container-fluid">
