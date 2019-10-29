@@ -44,14 +44,16 @@
    <table class="table table-hover">
       <thead>
          <tr>
-           <th scope="col1">Choose option</th>
-           <th scope="col2"></th>
+           <th scope="col1">Customer Name</th>
+           <th scope="col2">Credit Card No</th>
+           <th scope="col3">Phone Number</th>
+           <th scope="col4">Email</th>
         </tr>
       </thead>
       <tbody>
        {% for customer in customer_list %}
         <tr>
-           <th scope="row">{{ customer.name}}</th>
+               <td>{{ customer.name}}</td>
                <td>{{ customer.credit_card_no}}</td>
                <td>{{ customer.phone_number}}</td>
                <td>{{ customer.email}}</td>

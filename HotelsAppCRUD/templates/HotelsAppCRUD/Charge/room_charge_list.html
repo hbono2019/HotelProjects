@@ -43,14 +43,17 @@
    <table class="table table-hover">
       <thead>
          <tr>
-           <th scope="col1">Choose option</th>
-           <th scope="col2"></th>
+           <th scope="col1">Reservation Id</th>
+           <th scope="col2">Service Id</th>
+           <th scope="col3">Description</th>
+           <th scope="col4">Discount Code</th>
+           <th scope="col5">Discount Price</th>
         </tr>
       </thead>
       <tbody>
        {% for charges in charges_list %}
         <tr>
-           <th scope="row">{{charges.reservation_id}}</th>
+               <td>{{charges.reservation_id}}</td>
                <td> {{charges.service_id}}</td>
                <td> {{charges.description}}</td>
                <td> {{charges.discount_code}}</td>

@@ -44,14 +44,21 @@
    <table class="table table-hover">
       <thead>
          <tr>
-           <th scope="col1">Choose option</th>
-           <th scope="col2"></th>
+           <th scope="col1">Hotel Id</th>
+           <th scope="col2">Customer Id</th>
+           <th scope="col3">Room Id</th>
+           <th scope="col4">Room Number</th>
+           <th scope="col5">Reserved from Date</th>
+           <th scope="col6">Reserved to Date</th>
+           <th scope="col7">Number of Adults</th>
+           <th scope="col8">Number of children</th>
+           <th scope="col9">Payment No</th>
         </tr>
       </thead>
       <tbody>
        {% for reservation in reservation_list %}
         <tr>
-          <th scope="row">{{ reservation.hotel_id}}</th>
+               <td>{{ reservation.hotel_id}}</td>
                <td>{{ reservation.customer_id}}</td>
                <td>{{ reservation.room_id}}</td>
                <td>{{ reservation.room_number}}</td>
