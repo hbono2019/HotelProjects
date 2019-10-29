@@ -38,7 +38,7 @@ class CustomLoginView(LoginView):
     template_name = 'HotelsApp/accounts/login.html'
     def get(self, request, *args, **kwargs):
         if self.request.user.is_authenticated and self.request.user.is_staff: # and has_2fa(self.request):
-            return redirect('{}'.format(self.request.GET.get('next', 'HotelsApp:index')))
+            return redirect('{}'.format(self.request.GET.get('next', 'HotelsAppCRUD:rooms_reservation_public_index')))
         return super(CustomLoginView, self).get(request, *args, **kwargs)
 
     def form_valid(self, form):
