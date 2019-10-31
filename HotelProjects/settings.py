@@ -98,8 +98,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'WebProjectHotelsDB',
-        'HOST': 'mongodb+srv://HectorBonilla:HohoMongoDb2019$@webprojecthotelclstr-v7vgd.mongodb.net/admin',
-        'USER': 'HectorBonilla',
+        'HOST': 'mongodb+srv://HassanYacoob:HohoMongoDb2019$@webprojecthotelclstr-v7vgd.mongodb.net/admin',
+        'USER': 'HassanYacoob',
         'PASSWORD': 'HohoMongoDb2019$',
     }
 }
