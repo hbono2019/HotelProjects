@@ -40,6 +40,7 @@
   {% block content %}
   <h1>Room Service List</h1>
 <div class="container-fluid">
+   <div class="table-responsive">
   {% if service_list %}
    <table class="table table-hover">
       <thead>
@@ -65,6 +66,7 @@
   {% else %}
      <p>There are no Room Service in the database.</p>
   {% endif %}
+   </div>
 </div>
 {% endblock %}
 </body>
