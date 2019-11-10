@@ -4,6 +4,8 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         {% load static %}
         <link rel="icon" href="{% static 'image/favicon.png' %}" type="image/png">
         <title>Royal Hotel</title>
@@ -166,7 +168,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="comments-area">
+                        <div class="comments-area" id="comments-area">
                             <h4>05 Comments</h4>
                             <div class="comment-list">
                                 <div class="single-comment justify-content-between d-flex">
@@ -266,22 +268,25 @@
                         </div>
                         <div class="comment-form">
                             <h4>Leave a Reply</h4>
-                            <form>
+                            <form id="comment_form_post" name="comment_form_post" class="comment_form" type="post">
+                            {% csrf_token %}
                                 <div class="form-group form-inline">
                                   <div class="form-group col-lg-6 col-md-6 name">
-                                    <input type="text" class="form-control" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
                                   </div>
                                   <div class="form-group col-lg-6 col-md-6 email">
-                                    <input type="email" class="form-control" id="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
                                   </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="subject" placeholder="Subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Subject'">
+                                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Subject'">
                                 </div>
                                 <div class="form-group">
-                                    <textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
+                                    <textarea class="form-control mb-10" rows="5" id="message" name="message" placeholder="Message" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Message'" required=""></textarea>
                                 </div>
-                                <a href="#" class="primary-btn button_hover">Post Comment</a>
+                                <div class="submit">
+                                   <input type="submit" id="btn" name="btn" class="primary-btn button_hover" value="Post Comment" />
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -433,6 +438,43 @@
                 </div>
             </div>
         </section>
+<script type="text/javascript">
+    //snippet taken from stackoverflow but customized with the correct template and form
+    // modified also the ajax portion https://stackoverflow.com/questions/38963096/save-html-form-input-to-json-file
+  $(document).ready(function() {
+  $("#btn").click(function(e){
+   var jsonData = {};
+   var formData =  $("#comment_form_post").serializeArray();
+   console.log(formData);
+   $.each(formData, function() {
+        if (jsonData[this.name]) {
+           if (!jsonData[this.name].push) {
+               jsonData[this.name] = [jsonData[this.name]];
+           }
+           jsonData[this.name].push(this.value || '');
+       } else {
+           jsonData[this.name] = this.value || '';
+       }
+   });
+   console.log(jsonData);
+	$.ajax(
+	{
+             url : "/blogsingle/",
+             type: "POST",
+             data : jsonData,
+             dataType: "json",
+	});
+    e.preventDefault();
+    // code all customized for the blog extend comments
+    var JSONObject =  jsonData;
+    var div=$("<div class='comment-list' id='comment-list'><div class='single-comment justify-content-between d-flex'><div class='user justify-content-between d-flex'><div class='thumb'><img src='../static/image/blog/c5.jpg' alt=''></div>"+
+               "<div class='desc'><h5><a href='#'>" + JSONObject.name +"</a></h5><p class='date'>December 4, 2017 at 3:12 pm </p><p class='comment'>"+ JSONObject.message +"</p></div></div>"+
+               "<div class='reply-btn'><a href='' class='btn-reply text-uppercase'>reply</a></div></div></div>"
+              );
+    $('#comments-area').append(div);
+  });
+});
+</script>
         <!--================Blog Area =================-->
 
        <!--================ Start footer Area  =================-->
