@@ -4,6 +4,8 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         {% load static %}
         <link rel="icon" href="{% static 'image/favicon.png' %}" type="image/png">
         <title>Royal Hotel</title>
@@ -37,7 +39,7 @@
                             <li class="nav-item active"><a class="nav-link" href="{% url 'HotelsApp:index' %}">Home</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'HotelsApp:about' %}">About us</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'HotelsApp:accommodation' %}">Accommodation</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'HotelsApp:gallery' %}">Gallery</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'HotelsApp:gallery' %}">Getting Around</a></li>
                             <li class="nav-item submenu dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
                                 <ul class="dropdown-menu">
@@ -59,16 +61,44 @@
             <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
             <div class="container">
                 <div class="page-cover text-center">
-                    <h2 class="page-cover-tittle">Gallery</h2>
+                    <h2 class="page-cover-tittle">Getting Around</h2>
                     <ol class="breadcrumb">
                         <li><a href="{% url 'HotelsApp:index' %}">Home</a></li>
-                        <li class="active">Gallery</li>
+                        <li class="active">Getting Around</li>
                     </ol>
                 </div>
             </div>
         </section>
         <!--================Breadcrumb Area =================-->
-
+        <div class="restaurant_search_area position">
+                <div class="container">
+                    <div class="restaurant_table">
+                       <div class="row">
+                          <div class="col-md-10">
+                            <h2>Find Restaurants<br>nearby Royal Hotel</h2>
+                          </div>
+                       </div>
+                       <div class="row">
+                            <div class="col-md-4">
+                                 <p id="location"></p>
+                            </div>
+                       </div>
+                       <div class="row">
+                           <div class="col-md-6">
+				              <input id="getText" type="text" class="form-control" placeholder="Search for Restaurant">
+				           </div>
+                           <div class="col-md-4">
+                             <button id = "restaurantSearch" class = "btn button_hover">Search</button>
+                           </div>
+                       </div>
+                    </div>
+                </div>
+            </div>
+	<div class="container">
+		<div>
+			<div class = "restaurant col-md-12"></div>
+		</div>
+	</div>
         <!--================Breadcrumb Area =================-->
         <section class="gallery_area section_gap">
             <div class="container">
@@ -154,7 +184,60 @@
             </div>
         </section>
         <!--================Breadcrumb Area =================-->
-
+ <script>
+    var x = document.getElementById("location");
+    $(document).ready(function() {
+        $("#restaurantSearch").on("click", function() {
+          if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(showPosition);
+          } else {
+                  x.innerHTML = "Geolocation is not supported by this browser.";
+          }
+        });
+      function showPosition(position) {
+                                        x.innerHTML = "Latitude: " + position.coords.latitude +
+                                         "<br>Longitude: " + position.coords.longitude;
+                                        select(position.coords.latitude,  position.coords.longitude);
+      }
+     //--------------------------------------------------SEARCH BY Latitude & Longitude-----------------------------------------
+     function select(latitude,longitude) {
+      var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://developers.zomato.com/api/v2.1/search?lat=" + latitude + "&lon=" + longitude + "&count=100",
+        "method": "GET",
+        "headers": {
+        "user-key": "5563b9e1e40f64d4437a1cf10e38cc68",
+        'Content-Type': 'application/x-www-form-urlencoded'
+         }
+      }
+      $.getJSON(settings, function(data) {
+      data = data.restaurants;
+      var html = "";
+      $.each(data, function(index, value) {
+           var x = data[index];
+               $.each(x, function(index, value) {
+                      var location = x.restaurant.location;
+                      var userRating = x.restaurant.user_rating;
+                      html += "<div class='data img-rounded'>";
+                      html += "<div class='rating'>";
+                      html += "<span title='" + userRating.rating_text + "'><p style='color:white;background-color:#" + userRating.rating_color + ";border-radius:4px;border:none;padding:2px 10px 2px 10px;text-align: center;text-decoration:none;display:inline-block;font-size:16px;float:right;'><strong>" + userRating.aggregate_rating + "</strong></p></span><br>";
+                      html += "  <strong class='text-info'>" + userRating.votes + " votes</strong>";
+                      html += "</div>";
+                      html += "<img class='resimg img-rounded' src=" + value.thumb + " alt='Restaurant Image' height='185' width='185'>";
+                      html += "<a href=" + value.url + " target='_blank' class='action_link'><h2 style='color:red;'><strong>" + value.name + "</strong></h2></a>";
+                      html += "  <strong class='text-primary'>" + location.locality + "</strong><br>";
+                      html += "  <h6 style='color:grey;'><strong>" + location.address + "</strong></h6><hr>";
+                      html += "  <strong>CUISINES</strong>: " + value.cuisines + "<br>";
+                      html += "  <strong>COST FOR TWO</strong>: " + value.currency + value.average_cost_for_two + "<br>";
+                      html += "</div><br>";
+               });
+       });
+      $(".restaurant").html(html);
+      });
+     }
+    });
+</script>
        <!--================ Start footer Area  =================-->
         <footer class="footer-area section_gap">
             <div class="container">
