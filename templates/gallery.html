@@ -70,9 +70,14 @@
             </div>
         </section>
         <!--================Breadcrumb Area =================-->
-        <div class="restaurant_search_area position">
-                <div class="container">
-                    <div class="restaurant_table">
+       <!--================Banner Area =================-->
+        <section class="banner_area blog_banner d_flex align-items-center">
+            <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+            <div class="container">
+                <div class="banner_content text-center">
+                  <div class="restaurant_search_area position">
+                   <div class="container">
+                     <div class="restaurant_table">
                        <div class="row">
                           <div class="col-md-10">
                             <h2>Find Restaurants<br>nearby Royal Hotel</h2>
@@ -91,9 +96,18 @@
                              <button id = "restaurantSearch" class = "btn button_hover">Search</button>
                            </div>
                        </div>
-                    </div>
-                </div>
+                      <div class="row">
+                            <div class="col-md-4">
+                                 <p id="placeholder"></p>
+                            </div>
+                       </div>
+                     </div>
+                  </div>
+                 </div>
+               </div>
             </div>
+        </section>
+        <!--================Banner Area =================-->
 	<div class="container">
 		<div>
 			<div class = "restaurant col-md-12"></div>
@@ -195,8 +209,8 @@
           }
         });
       function showPosition(position) {
-                                        x.innerHTML = "Latitude: " + position.coords.latitude +
-                                         "<br>Longitude: " + position.coords.longitude;
+                                        // x.innerHTML = "Latitude: " + position.coords.latitude +
+                                        // "<br>Longitude: " + position.coords.longitude;
                                         select(position.coords.latitude,  position.coords.longitude);
       }
      //--------------------------------------------------SEARCH BY Latitude & Longitude-----------------------------------------
