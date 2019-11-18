@@ -67,7 +67,6 @@ class RoomReservation(models.Model):
     hotel_id = models.ForeignKey(Hotel, on_delete=models.CASCADE)
     customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE, default='')
     room_id = models.ForeignKey(Room, on_delete=models.CASCADE)
-    room_number = models.CharField(max_length=120)
     from_date = models.DateField()
     to_date = models.DateField()
     number_of_adults = models.IntegerField()

@@ -30,7 +30,7 @@ class RoomForm(ModelForm):
 class RoomReservationForm(ModelForm):
     class Meta:
         model = RoomReservation
-        fields = ['hotel_id', 'customer_id', 'room_id', 'room_number', 'from_date', 'to_date', 'number_of_adults',
+        fields = ['hotel_id', 'customer_id', 'room_id', 'from_date', 'to_date', 'number_of_adults',
                   'number_of_children', 'payment_no']
         widgets = {
           'from_date': DateInput(format='%m/%d/%Y', attrs={'class': "input", 'placeholder': "MM/dd/YYYY", 'data-mask': "##/##/####"}),
