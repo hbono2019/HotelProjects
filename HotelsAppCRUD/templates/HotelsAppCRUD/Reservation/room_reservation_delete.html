@@ -66,7 +66,7 @@
 <div class="container-fluid">
 <form action="" method="POST">
     {% csrf_token %}
-    <h1>Confirm Delete the following "{{ object.reservation_id }} {{ object.room_number }} {{ object.from_date }} {{ object.to_date }}"</h1>
+    <h1>Confirm Delete the following "{{ object.reservation_id }} {{ object.reservation_description }} {{ object.room_number }} {{ object.from_date }} {{ object.to_date }}"</h1>
     <p><input type='Submit' value='Yes'/><a href="../"> Cancel</a></p>
 </form>
 </div>

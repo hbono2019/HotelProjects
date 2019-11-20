@@ -58,11 +58,11 @@ class CustomerCreate(CreateView):
     form_class = CustomerForm
     def create_customer(request):
         if request.method == "POST":
-            form=CustomerForm(request.POST)
+            form = CustomerForm(request.POST)
             if form.is_valid():
                customer_item = form.save(commit=False)
                customer_item.save()
-               return redirect('/Customers/'+ str(customer_item.id)+ '/')
+               return redirect('HotelsAppCRUD:customer_index')
         else:
             form = CustomerForm()
             context = {'form': form}
@@ -89,12 +89,12 @@ class CustomerUpdate(UpdateView):
     form_class = CustomerForm
     model = Customer
     def update_customer(request, id=None):
-        item = get_object_or_404(Hotel, id=id)
-        form = HotelForm(request.POST or None, instance=item)
+        item = get_object_or_404(Customer, id=id)
+        form = CustomerForm(request.POST or None, instance=item)
         if form.is_valid():
            customer_item = form.save(commit=False)
            customer_item.save()
-           return redirect('/Customers/' + str(customer_item.id) + '/')
+           return redirect('HotelsAppCRUD:customer_index')
         context = {'form': form}
         return render(request, template_name, context)
 
@@ -120,7 +120,7 @@ class HotelCreate(CreateView):
             if form.is_valid():
                hotel_item = form.save(commit=False)
                hotel_item.save()
-               return redirect('/Hotels/'+ str(hotel_item.id)+ '/')
+               return redirect('HotelsAppCRUD:hotel_index')
         else:
             form = HotelForm()
             context = {'form': form}
@@ -152,7 +152,7 @@ class HotelUpdate(UpdateView):
         if form.is_valid():
             hotel_item = form.save(commit=False)
             hotel_item.save()
-            return redirect('/Hotels/' + str(hotel_item.id) + '/')
+            return redirect('HotelsAppCRUD:hotel_index')
         context = {'form': form}
         return render(request, template_name, context)
 
@@ -171,14 +171,14 @@ class HotelDelete(DeleteView):
 
 class RoomCreate(CreateView):
     template_name = "HotelsAppCRUD/Rooms/room_create.html"
-    form_class =  RoomForm
+    form_class = RoomForm
     def create_room(request):
         if request.method == "POST":
-            form=RoomForm(request.POST)
+            form = RoomForm(request.POST)
             if form.is_valid():
                room_item = form.save(commit=False)
                room_item.save()
-               return redirect('/Rooms/'+ str(room_item.id)+ '/')
+               return redirect('HotelsAppCRUD:room_index')
         else:
             form = RoomForm()
             context = {'form': form}
@@ -210,7 +210,7 @@ class RoomUpdate(UpdateView):
         if form.is_valid():
             room_item = form.save(commit=False)
             room_item.save()
-            return redirect('/Hotels/' + str(room_item.id) + '/')
+            return redirect('HotelsAppCRUD:room_index')
         context = {'form': form}
         return render(request, template_name, context)
 
@@ -236,7 +236,7 @@ class RoomReservationCreate(CreateView):
             if form.is_valid():
                reservation_item = form.save(commit=False)
                reservation_item.save()
-               return redirect('/Hotels/'+ str(reservation_item.id)+ '/')
+               return redirect('HotelsAppCRUD:rooms_reservation_index')
         else:
             form =RoomReservationForm()
             context = {'form': form}
@@ -248,11 +248,11 @@ class RoomReservationPubCreate(CreateView):
     form_class = RoomReservationForm
     def create_reservation(request):
         if request.method == "POST":
-            form=RoomReservationForm(request.POST)
+            form = RoomReservationForm(request.POST)
             if form.is_valid():
                reservation_item = form.save(commit=False)
                reservation_item.save()
-               return redirect('/Hotels/'+ str(reservation_item.id)+ '/')
+               return redirect('HotelsAppCRUD:rooms_reservation_public_index')
         else:
             form =RoomReservationForm()
             context = {'form': form}
@@ -296,7 +296,7 @@ class RoomReservationUpdate(UpdateView):
         if form.is_valid():
             reservation_item = form.save(commit=False)
             reservation_item.save()
-            return redirect('/Hotels/' + str(reservation_item.id) + '/')
+            return redirect('HotelsAppCRUD:rooms_reservation_index')
         context = {'form': form}
         return render(request, template_name, context)
 
@@ -311,7 +311,7 @@ class RoomReservationPubUpdate(UpdateView):
         if form.is_valid():
             reservation_item = form.save(commit=False)
             reservation_item.save()
-            return redirect('/Hotels/' + str(reservation_item.id) + '/')
+            return redirect('HotelsAppCRUD:rooms_reservation_public_index')
         context = {'form': form}
         return render(request, template_name, context)
 
@@ -337,7 +337,7 @@ class RoomServiceCreate(CreateView):
             if form.is_valid():
                service_item = form.save(commit=False)
                service_item.save()
-               return redirect('/Hotels/'+ str(service_item.id)+ '/')
+               return redirect('HotelsAppCRUD:rooms_service_index')
         else:
             form = RoomServiceForm()
             context = {'form': form}
@@ -368,7 +368,7 @@ class RoomServiceUpdate(UpdateView):
         if form.is_valid():
             service_item = form.save(commit=False)
             service_item.save()
-            return redirect('/Hotels/' + str(service_item.id) + '/')
+            return redirect('HotelsAppCRUD:rooms_service_index')
         context = {'form': form}
         return render(request, template_name, context)
 
@@ -394,7 +394,7 @@ class RoomChargesCreate(CreateView):
             if form.is_valid():
                charge_item = form.save(commit=False)
                charge_item.save()
-               return redirect('/Hotels/'+ str(charge_item.id)+ '/')
+               return redirect('HotelsAppCRUD:rooms_charge_index')
         else:
             form = RoomChargesForm()
             context = {'form': form}
@@ -425,7 +425,7 @@ class RoomChargesUpdate(UpdateView):
         if form.is_valid():
             charge_item = form.save(commit=False)
             charge_item.save()
-            return redirect('/Hotels/' + str(charge_item.id) + '/')
+            return redirect('HotelsAppCRUD:rooms_charge_index')
         context = {'form': form}
         return render(request, template_name, context)
 
@@ -451,7 +451,7 @@ class RoomBillingCreate(CreateView):
             if form.is_valid():
                billing_item = form.save(commit=False)
                billing_item.save()
-               return redirect('/Hotels/'+ str(billing_item.id)+ '/')
+               return redirect('HotelsAppCRUD:rooms_billing_index')
         else:
             form = RoomBillingForm()
             context = {'form': form}
@@ -478,11 +478,11 @@ class RoomBillingUpdate(UpdateView):
     model = RoomBilling
     def update_billing(request, id=None):
         item = get_object_or_404(Hotel, id=id)
-        form =RoomBillingForm(request.POST or None, instance=item)
+        form = RoomBillingForm(request.POST or None, instance=item)
         if form.is_valid():
             billing_item = form.save(commit=False)
             billing_item.save()
-            return redirect('/Hotels/' + str(billing_item.id) + '/')
+            return redirect('HotelsAppCRUD:rooms_billing_index')
         context = {'form': form}
         return render(request, template_name, context)
 

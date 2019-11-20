@@ -12,6 +12,9 @@ class Customer(models.Model):
     def get_absolute_url(self):
         return reverse('HotelsAppCRUD:customer_index')
 
+    def __str__(self):
+        return "(%s) %s" % (self.customer_id, self.name)
+
 
 class Hotel(models.Model):
     hotel_id = models.AutoField(primary_key=True)
@@ -27,6 +30,10 @@ class Hotel(models.Model):
     longitude = models.DecimalField(max_digits=9, decimal_places=7)
     def get_absolute_url(self):
         return reverse('HotelsAppCRUD:hotel_index')
+
+    def __str__(self):
+        return "(%s) %s" % (self.hotel_id, self.name)
+
 
 
 class Room(models.Model):
@@ -61,12 +68,16 @@ class Room(models.Model):
     def get_absolute_url(self):
         return reverse('HotelsAppCRUD:room_index')
 
+    def __str__(self):
+        return "(%s) %s" % (self.room_id, self.room_number)
+
 
 class RoomReservation(models.Model):
     reservation_id = models.AutoField(primary_key=True)
     hotel_id = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name='reservation_hotel')
     customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='reservation_customer', default='')
     room_id = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='reservation_room')
+    reservation_description = models.CharField(max_length=60, default='')
     from_date = models.DateField()
     to_date = models.DateField()
     number_of_adults = models.IntegerField()
@@ -75,6 +86,10 @@ class RoomReservation(models.Model):
     def get_absolute_url(self):
         return reverse('HotelsAppCRUD:rooms_reservation_index')
 
+    def __str__(self):
+        return "(%s) %s (%s) (%s)" % (self.reservation_id, self.reservation_description, self.from_date, self.to_date)
+
+
 
 class RoomService(models.Model):
     service_id = models.AutoField(primary_key=True)
@@ -82,6 +97,9 @@ class RoomService(models.Model):
     service_price = models.DecimalField(max_digits=5, decimal_places=2, default='')
     def get_absolute_url(self):
         return reverse('HotelsAppCRUD:rooms_service_index')
+
+    def __str__(self):
+        return "(%s) %s" % (self.service_id, self.service_description)
 
 
 class RoomCharges(models.Model):
@@ -93,6 +111,9 @@ class RoomCharges(models.Model):
     discount_price = models.DecimalField(max_digits=5, decimal_places=2, default='')
     def get_absolute_url(self):
         return reverse('HotelsAppCRUD:rooms_charge_index')
+
+    def __str__(self):
+        return "(%s) %s" % (self.room_charge_id, self.description)
 
 
 class RoomBilling(models.Model):
@@ -109,3 +130,7 @@ class RoomBilling(models.Model):
     total_invoice = models.DecimalField(max_digits=5, decimal_places=2, default='')
     def get_absolute_url(self):
         return reverse('HotelsAppCRUD:rooms_billing_index')
+
+    def __str__(self):
+        return "(%s) %s" % (self.reservation_id, self.invoice_no)
+
