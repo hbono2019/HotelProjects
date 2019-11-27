@@ -78,27 +78,74 @@
                   <div class="restaurant_search_area position">
                    <div class="container">
                      <div class="restaurant_table">
-                       <div class="row">
-                          <div class="col-md-10">
-                            <h2>Find Restaurants<br>nearby Royal Hotel</h2>
+                       <div class="row mx-auto well col-lg-12 mt-5">
+                           <div class="col-xs-4 pl-0 pr-0">
+                              <p id="location"></p>
+                           </div>
+                       </div>
+                       <div class="row mx-auto well col-lg-12 mt-5">
+                          <div class="col-md-10 pr-0">
+                            <h3>Find Restaurants<br>nearby Royal Hotel</h3>
                           </div>
                        </div>
-                       <div class="row">
-                            <div class="col-md-4">
-                                 <p id="location"></p>
-                            </div>
-                       </div>
-                       <div class="row">
-                           <div class="col-md-6">
-				              <input id="textRestaurantSearch" type="text" class="form-control" placeholder="Search for types of cuisine">
-				           </div>
-                           <div class="col-md-4">
+                       <div class="row mx-auto well col-lg-12 mt-5">
+                           <div class="col-md-4 pr-0">
+                               <div class="overflow-auto">
+                               <select id="listRestaurantSearch" class="form-control form-control-lg">
+                                           <option class="bg-secondary text-black" value="" hidden>Select Restaurant Category</option>
+                                           <option class="bg-secondary text-black" value="Delivery">Delivery</option>
+                                           <option class="bg-secondary text-black" value="Dine-out">Dine-out</option>
+                                           <option class="bg-secondary text-black" value="Nightlife">Nightlife</option>
+                                           <option class="bg-secondary text-black" value="Catching-up">Catching-up</option>
+                                           <option class="bg-secondary text-black" value="Takeaway">Takeaway</option>
+                                           <option class="bg-secondary text-black" value="Cafes">Cafes</option>
+                                           <option class="bg-secondary text-black" value="Daily Menus">Daily Menus</option>
+                                           <option class="bg-secondary text-black" value="Breakfast">Breakfast</option>
+                                           <option class="bg-secondary text-black" value="Lunch">Lunch</option>
+                                           <option class="bg-secondary text-black" value="Dinner">Dinner</option>
+                                           <option class="bg-secondary text-black" value="Pubs & Bars">Pubs & Bars</option>
+                                           <option class="bg-secondary text-black" value="Pocket Friendly Delivery">Pocket Friendly Delivery</option>
+                                           <option class="bg-secondary text-black" value="Clubs & Lounges">Clubs & Lounges</option>
+                               </select>
+                               </div>
+                           </div>
+                           <div class="col-md-4 pr-0">
                              <button id = "restaurantSearch" class = "btn button_hover">Search</button>
                            </div>
                        </div>
-                      <div class="row">
+                       <div class="row mx-auto well col-lg-12 mt-5">
                             <div class="col-md-4">
                                  <p id="placeholder"></p>
+                            </div>
+                       </div>
+                      <div class="row mx-auto well col-lg-12 mt-5">
+                            <div class="col-md-4">
+                                 <p id="placeholder2"></p>
+                            </div>
+                       </div>
+                       <div class="row mx-auto well col-lg-12 mt-5">
+                            <div class="col-md-4">
+                                 <p id="placeholder3"></p>
+                            </div>
+                       </div>
+                       <div class="row mx-auto well col-lg-12 mt-5">
+                            <div class="col-md-4">
+                                 <p id="placeholder4"></p>
+                            </div>
+                       </div>
+                       <div class="row mx-auto well col-lg-12 mt-5">
+                            <div class="col-md-4">
+                                 <p id="placeholder5"></p>
+                            </div>
+                       </div>
+                       <div class="row mx-auto well col-lg-12 mt-5">
+                            <div class="col-md-4">
+                                 <p id="placeholder6"></p>
+                            </div>
+                       </div>
+                      <div class="row mx-auto well col-lg-12 mt-5">
+                            <div class="col-md-4">
+                                 <p id="placeholder7"></p>
                             </div>
                        </div>
                      </div>
@@ -209,9 +256,9 @@
           }
         });
       function showPosition(position) {
-                                       var cuisineType = document.getElementById("textRestaurantSearch").value;
-                                       if(cuisineType){    console.log("inside cuisine search"); console.log(cuisineType);
-                                                           select_by_name(position.coords.latitude,  position.coords.longitude, cuisineType);
+                                       var cuisineCateg = document.getElementById("listRestaurantSearch").value;
+                                       if(cuisineCateg){    console.log("inside category search"); console.log(cuisineCateg);
+                                                           select_by_name(position.coords.latitude,  position.coords.longitude, cuisineCateg);
                                                       }
                                        else{
                                              select(position.coords.latitude,  position.coords.longitude);
@@ -229,6 +276,7 @@
         'Content-Type': 'application/x-www-form-urlencoded'
          }
       }
+      // Code snippet taken from https://codepen.io/pbairishal/pen/JMOdKz
       $.getJSON(settings, function(data) {
       data = data.restaurants;
       var html = "";
@@ -251,20 +299,22 @@
                       html += "</div><br>";
                });
        });
+      // Code snippet taken from https://codepen.io/pbairishal/pen/JMOdKz
       $(".restaurant").html(html);
       });
      }
-     function select_by_name(latitude, longitude, cuisineType) {
+     function select_by_name(latitude, longitude, cuisineCateg) {
       var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "https://developers.zomato.com/api/v2.1/search?lat=" + latitude + "&lon=" + longitude + "&cuisines=" + cuisineType + "&count=100",
+        "url": "https://developers.zomato.com/api/v2.1/search?lat=" + latitude + "&lon=" + longitude + "&category=" + cuisineCateg + "&count=100",
         "method": "GET",
         "headers": {
         "user-key": "5563b9e1e40f64d4437a1cf10e38cc68",
         'Content-Type': 'application/x-www-form-urlencoded'
          }
       }
+      // Code snippet taken from https://codepen.io/pbairishal/pen/JMOdKz
       $.getJSON(settings, function(data) {
       data = data.restaurants;
       var html = "";
@@ -287,6 +337,7 @@
                       html += "</div><br>";
                });
        });
+      // Code snippet taken from https://codepen.io/pbairishal/pen/JMOdKz
       $(".restaurant").html(html);
       });
      }
