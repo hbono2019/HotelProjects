@@ -38,7 +38,7 @@ class CustomLoginView(LoginView):
     Custom login view.
     """
     form_class = LoginForm
-    template_name = 'HotelsApp/accounts/login.html'
+    template_name = 'HotelsApp/account/login.html'
     def get(self, request, *args, **kwargs):
         if self.request.user.is_authenticated and self.request.user.is_staff: # and has_2fa(self.request):
             return redirect('{}'.format(self.request.GET.get('next', 'HotelsApp:login_index')))
@@ -53,25 +53,25 @@ class CustomLoginView(LoginView):
 
 
 def user_profile(request):
-    return render(request, 'HotelsApp/accounts/user_profile.html', {})
+    return render(request, 'HotelsApp/account/user_profile.html', {})
 
 def login(request):
-    return render(request, 'HotelsApp/accounts/login.html', {})
+    return render(request, 'HotelsApp/account/login.html', {})
 
 def logout(request):
-    return render(request, 'HotelsApp/accounts/logged_out.html', {})
+    return render(request, 'HotelsApp/account/logged_out.html', {})
 
 def password_reset_complete(request):
-    return render(request, 'HotelsApp/accounts/password_reset_complete.html', {})
+    return render(request, 'HotelsApp/account/password_reset_complete.html', {})
 
 def password_reset_confirm(request):
-    return render(request, 'HotelsApp/accounts/password_reset_confirm.html', {})
+    return render(request, 'HotelsApp/account/password_reset_confirm.html', {})
 
 def password_reset_done(request):
-    return render(request, 'HotelsApp/accounts/password_reset_done.html', {})
+    return render(request, 'HotelsApp/account/password_reset_done.html', {})
 
 def password_reset_email(request):
-    return render(request, 'HotelsApp/accounts/password_reset_email.html', {})
+    return render(request, 'HotelsApp/account/password_reset_email.html', {})
 
 def password_reset_form(request):
-    return render(request, 'HotelsApp/accounts/password_reset_form.html', {})
+    return render(request, 'HotelsApp/account/password_reset_form.html', {})

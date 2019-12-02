@@ -16,17 +16,17 @@ def index(request):
 
 def Customers(request):
     data = {}
-    return render(request, "HotelsAppCRUD/Customers/index.html", data)
+    return render(request, "HotelsAppCRUD/Customer/index.html", data)
 
 
 def Hotels(request):
     data = {}
-    return render(request, "HotelsAppCRUD/Hotels/index.html", data)
+    return render(request, "HotelsAppCRUD/Hotel/index.html", data)
 
 
 def Rooms(request):
     data = {}
-    return render(request, "HotelsAppCRUD/Rooms/index.html", data)
+    return render(request, "HotelsAppCRUD/Room/index.html", data)
 
 
 def RoomsBilling(request):
@@ -54,7 +54,7 @@ def RoomsService(request):
 
 
 class CustomerCreate(CreateView):
-    template_name = "HotelsAppCRUD/Customers/customer_create.html"
+    template_name = "HotelsAppCRUD/Customer/customer_create.html"
     form_class = CustomerForm
     def create_customer(request):
         if request.method == "POST":
@@ -70,7 +70,7 @@ class CustomerCreate(CreateView):
 
 
 class CustomerList(ListView):
-    template_name = "HotelsAppCRUD/Customers/customer_list.html"
+    template_name = "HotelsAppCRUD/Customer/customer_list.html"
     form_class = CustomerForm
     model = Customer
     context_object_name = 'customer_list'
@@ -80,12 +80,12 @@ class CustomerList(ListView):
 
 
 class CustomerDetail(DetailView):
-    template_name = "HotelsAppCRUD/Customers/customer_detail.html"
+    template_name = "HotelsAppCRUD/Customer/customer_detail.html"
     model = Customer
 
 
 class CustomerUpdate(UpdateView):
-    template_name = "HotelsAppCRUD/Customers/customer_update.html"
+    template_name = "HotelsAppCRUD/Customer/customer_update.html"
     form_class = CustomerForm
     model = Customer
     def update_customer(request, id=None):
@@ -102,7 +102,7 @@ class CustomerUpdate(UpdateView):
 class CustomerDelete(DeleteView):
     model = Customer
     success_url = reverse_lazy('HotelsAppCRUD:customer_index')
-    template_name = 'HotelsAppCRUD/Customers/customer_delete.html'
+    template_name = 'HotelsAppCRUD/Customer/customer_delete.html'
     def confirm_delete(request, id=None):
         obj = get_object_or_404(Customer, id=id)
         if request.method == "POST":
@@ -112,7 +112,7 @@ class CustomerDelete(DeleteView):
 
 
 class HotelCreate(CreateView):
-    template_name = "HotelsAppCRUD/Hotels/hotel_create.html"
+    template_name = "HotelsAppCRUD/Hotel/hotel_create.html"
     form_class = HotelForm
     def create_hotel(request):
         if request.method == "POST":
@@ -128,7 +128,7 @@ class HotelCreate(CreateView):
 
 
 class HotelList(ListView):
-    template_name = "HotelsAppCRUD/Hotels/hotel_list.html"
+    template_name = "HotelsAppCRUD/Hotel/hotel_list.html"
     form_class = HotelForm
     model = Hotel
     queryset = Hotel.objects.all()
@@ -138,12 +138,12 @@ class HotelList(ListView):
 
 
 class HotelDetail(DetailView):
-    template_name = "HotelsAppCRUD/Hotels/hotel_detail.html"
+    template_name = "HotelsAppCRUD/Hotel/hotel_detail.html"
     model = Hotel
 
 
 class HotelUpdate(UpdateView):
-    template_name = "HotelsAppCRUD/Hotels/hotel_update.html"
+    template_name = "HotelsAppCRUD/Hotel/hotel_update.html"
     form_class = HotelForm
     model = Hotel
     def update_hotel(request, id=None):
@@ -160,7 +160,7 @@ class HotelUpdate(UpdateView):
 class HotelDelete(DeleteView):
     model = Hotel
     success_url = reverse_lazy('HotelsAppCRUD:hotel_index')
-    template_name = 'HotelsAppCRUD/Hotels/hotel_delete.html'
+    template_name = 'HotelsAppCRUD/Hotel/hotel_delete.html'
     def confirm_delete(request, id=None):
         obj = get_object_or_404(Hotel, id=id)
         if request.method == "POST":
@@ -170,7 +170,7 @@ class HotelDelete(DeleteView):
 
 
 class RoomCreate(CreateView):
-    template_name = "HotelsAppCRUD/Rooms/room_create.html"
+    template_name = "HotelsAppCRUD/Room/room_create.html"
     form_class = RoomForm
     def create_room(request):
         if request.method == "POST":
@@ -186,7 +186,7 @@ class RoomCreate(CreateView):
 
 
 class RoomList(ListView):
-    template_name = "HotelsAppCRUD/Rooms/room_list.html"
+    template_name = "HotelsAppCRUD/Room/room_list.html"
     form_class = RoomForm
     model = Room
     context_object_name = 'room_list'
@@ -196,12 +196,12 @@ class RoomList(ListView):
 
 
 class RoomDetail(DetailView):
-    template_name = "HotelsAppCRUD/Rooms/room_detail.html"
+    template_name = "HotelsAppCRUD/Room/room_detail.html"
     model = Room
 
 
 class RoomUpdate(UpdateView):
-    template_name = "HotelsAppCRUD/Rooms/room_update.html"
+    template_name = "HotelsAppCRUD/Room/room_update.html"
     form_class = RoomForm
     model = Room
     def update_room(request, id=None):
@@ -218,7 +218,7 @@ class RoomUpdate(UpdateView):
 class RoomDelete(DeleteView):
     model = Room
     success_url = reverse_lazy('HotelsAppCRUD:room_index')
-    template_name = 'HotelsAppCRUD/Rooms/room_delete.html'
+    template_name = 'HotelsAppCRUD/Room/room_delete.html'
     def confirm_delete(request, id=None):
         obj = get_object_or_404(Room, id=id)
         if request.method == "POST":
