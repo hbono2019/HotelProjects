@@ -55,3 +55,10 @@ class RoomBillingForm(ModelForm):
         model = RoomBilling
         fields = ['customer_id', 'room_charge_id', 'invoice_no', 'billing_address1', 'billing_address2', 'county',
                   'postal_code', 'country', 'total_discounts', 'total_invoice']
+
+
+class RoomReservationLookupForm(ModelForm):
+    class Meta:
+        model = RoomReservationView
+        fields = ['hotel_id', 'customer_id', 'room_id', 'reservation_description', 'from_date', 'to_date', 'number_of_adults',
+                  'number_of_children', 'payment_no']

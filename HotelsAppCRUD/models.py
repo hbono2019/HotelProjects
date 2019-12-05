@@ -1,6 +1,7 @@
-from django.db import models
 from django.urls import reverse
+from djongo import models
 from mongoengine import *
+
 
 # Create your models here.
 class Customer(models.Model):
@@ -133,4 +134,38 @@ class RoomBilling(models.Model):
 
     def __str__(self):
         return "(%s) %s" % (self.reservation_id, self.invoice_no)
+
+
+class RoomReservationView(models.Model):
+    reservation_id = models.AutoField(primary_key=True)
+    hotel_id = models.ForeignKey(Hotel, on_delete=models.CASCADE)
+    customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    room_id = models.ForeignKey(Room, on_delete=models.CASCADE)
+    reservation_description = models.CharField(max_length=60)
+    from_date = models.DateField()
+    to_date = models.DateField()
+    number_of_adults = models.IntegerField()
+    number_of_children = models.IntegerField()
+    payment_no = models.CharField(max_length=120, blank=True, null=True)
+
+    hotel = models.ArrayModelField(
+        model_container=Hotel,
+    )
+
+    customer = models.ArrayModelField(
+        model_container=Customer,
+    )
+
+    room = models.ArrayModelField(
+        model_container=Room,
+    )
+    def get_absolute_url(self):
+        return reverse('HotelsAppCRUD:rooms_reservation_index')
+
+    def __str__(self):
+        return "(%s) %s (%s) (%s)" % (self.reservation_id, self.reservation_description, self.from_date, self.to_date)
+
+    class Meta:
+        managed = False
+        db_table = 'HotelsAppCRUD_roomreservation_view'
 

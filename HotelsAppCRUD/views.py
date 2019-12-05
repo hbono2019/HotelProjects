@@ -497,3 +497,17 @@ class RoomBillingDelete(DeleteView):
            obj.delete()
            context = {'object': obj}
            return render(request, template_name, context)
+
+
+class RoomReservationLookupList(ListView):
+    template_name = "HotelsAppCRUD/Reservation/room_reservation_lookup_list.html"
+    model = RoomReservationView
+    context_object_name = 'reservation_list'
+    queryset = RoomReservationView.objects.all()
+    paginate_by = 10
+    ordering = ['-reservation_id']
+
+class RoomReservationLookupView(DetailView):
+    template_name = "HotelsAppCRUD/Reservation/room_reservation_lookup_detail.html"
+    model = RoomReservationView
+

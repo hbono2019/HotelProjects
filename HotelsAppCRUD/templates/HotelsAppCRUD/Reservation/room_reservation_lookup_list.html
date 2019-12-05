@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
         {% load static %}
         <link rel="icon" href="{% static 'image/favicon.png' %}" type="image/png">
         <title>Royal Hotel</title>
@@ -17,7 +20,7 @@
         <!-- main css -->
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
-    <title>Room Reservation Index</title>
+    <title>Room Reservation Lookup List</title>
 </head>
 <body>
       <!--================Header Area =================-->
@@ -56,36 +59,76 @@
                     <h2 class="page-cover-tittle f_48">Hotels Application Maintenance Database</h2>
                     <ol class="breadcrumb">
                         <li><a href="{% url 'HotelsAppCRUD:rooms_reservation_index' %}">Home</a></li>
-                        <li class="active">Room Reservation Index</li>
+                        <li class="active">Room Reservation Lookup List</li>
                     </ol>
                 </div>
             </div>
         </section>
         <!--================Breadcrumb Area =================-->
+{% block content %}
+  <h1>Reservation List</h1>
 <div class="container-fluid">
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col1">Choose option</th>
-      <th scope="col2"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">Room Reservation Menu</th>
-      <td> <a href="{% url 'HotelsAppCRUD:rooms_reservation_create' %}"> Rooms Reservation Create</a> </td>
-    </tr>
-    <tr>
-      <th scope="row">Room Reservation Menu</th>
-      <td> <a href="{% url 'HotelsAppCRUD:rooms_reservation_list' %}"> Rooms Reservation List</a> </td>
-    </tr>
-    <tr>
-      <th scope="row">Room Reservation Lookup Menu</th>
-      <td> <a href="{% url 'HotelsAppCRUD:rooms_reservation_lookup_list' %}"> Rooms Reservation Lookup</a> </td>
-    </tr>
-  </tbody>
-</table>
+   <div class="table-responsive">
+  {% if reservation_list %}
+   <table class="table table-hover">
+     <thead>
+         <tr>
+           <th scope="col1">Hotel Name</th>
+           <th scope="col2">Star Rating</th>
+           <th scope="col3">County</th>
+           <th scope="col4">Name</th>
+           <th scope="col5">Credit Card No</th>
+           <th scope="col6">Phone Number</th>
+           <th scope="col7">Email</th>
+           <th scope="col8">Room Number</th>
+           <th scope="col9">Room Type</th>
+           <th scope="col10">Type</th>
+           <th scope="col11">No of Beds</th>
+           <th scope="col12">Max Occupancy</th>
+           <th scope="col13">Cost Per Night</th>
+           <th scope="col14">Reservation Id</th>
+           <th scope="col15">Reservation Desc</th>
+           <th scope="col16">Reserved from Date</th>
+           <th scope="col17">Reserved to Date</th>
+           <th scope="col18">No of Adults</th>
+           <th scope="col19">No of children</th>
+           <th scope="col20">Payment No</th>
+        </tr>
+      </thead>
+      <tbody>
+       {% for roomreservationview in reservation_list %}
+        <tr>
+               <td>{{ roomreservationview.hotel.0.name}}</td>
+               <td>{{ roomreservationview.hotel.0.star_rating}}</td>
+               <td>{{ roomreservationview.hotel.0.county}}</td>
+               <td>{{ roomreservationview.customer.0.name}}</td>
+               <td>{{ roomreservationview.customer.0.credit_card_no}}</td>
+               <td>{{ roomreservationview.customer.0.phone_number}}</td>
+               <td>{{ roomreservationview.customer.0.email}}</td>
+               <td>{{ roomreservationview.room.0.room_number}}</td>
+               <td>{{ roomreservationview.room.0.room_type}}</td>
+               <td>{{ roomreservationview.room.0.type}}</td>
+               <td>{{ roomreservationview.room.0.beds}}</td>
+               <td>{{ roomreservationview.room.0.max_occupancy}}</td>
+               <td>{{ roomreservationview.room.0.cost_per_night}}</td>
+               <td>{{ roomreservationview.reservation_id}}</td>
+               <td>{{ roomreservationview.reservation_description}}</td>
+               <td>{{ roomreservationview.from_date}}</td>
+               <td>{{ roomreservationview.to_date}}</td>
+               <td>{{ roomreservationview.number_of_adults}}</td>
+               <td>{{ roomreservationview.number_of_children}}</td>
+               <td>{{ roomreservationview.payment_no}}</td>
+              <td> <a href="{% url 'HotelsAppCRUD:rooms_reservation_lookup_view' pk=roomreservationview.reservation_id %}" class="btn btn-info btn-block" role="button">Reservation Lookup</a> </td>
+        </tr>
+       {% endfor %}
+      </tbody>
+   </table>
+  {% else %}
+     <p>There are no Reservation in the database.</p>
+  {% endif %}
+   </div>
 </div>
+{% endblock %}
         <!--================ start footer Area  =================-->
         <footer class="footer-area section_gap">
             <div class="container">
