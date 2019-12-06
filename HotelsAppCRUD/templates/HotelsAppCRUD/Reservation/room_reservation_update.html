@@ -65,6 +65,7 @@
         </section>
         <!--================Breadcrumb Area =================-->
         <script type="text/javascript">
+         // Code snippet from https://stackoverflow.com/questions/73971/using-javascript-how-do-i-make-sure-a-date-range-is-valid
           function checkDateRange(start, end) {
           var startDate = Date.parse(start);
           var endDate = Date.parse(end);
@@ -87,7 +88,7 @@
              }
             return end;
           }
-
+         // Code snippet from https://stackoverflow.com/questions/73971/using-javascript-how-do-i-make-sure-a-date-range-is-valid
 	       onload = function(){
 	            document.getElementById('id_from_date').oninput = function(){
 	            $('#id_from_date').datetimepicker({
