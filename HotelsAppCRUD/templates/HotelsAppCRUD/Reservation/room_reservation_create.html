@@ -65,19 +65,44 @@
         </section>
         <!--================Breadcrumb Area =================-->
         <script type="text/javascript">
-            $(function () {
-                $('#id_from_date').datetimepicker({
+          function checkDateRange(start, end) {
+          var startDate = Date.parse(start);
+          var endDate = Date.parse(end);
+              if (isNaN(startDate)) {
+                 alert("The start date provided is not valid, please enter a valid date.");
+                 return null;
+               }
+               if (isNaN(endDate)) {
+                  alert("The end date provided is not valid, please enter a valid date.");
+                  return null;
+               }
+          var difference = (endDate - startDate) / (86400000 * 1);
+          if (difference < 0) {
+             alert("The start date must come before the end date.");
+             return null;
+             }
+           if (difference < 1) {
+              alert("The range must be at least one day apart.");
+              return null;
+             }
+            return end;
+          }
+
+	       onload = function(){
+	            document.getElementById('id_from_date').oninput = function(){
+	            $('#id_from_date').datetimepicker({
                     format: 'mm/dd/yyyy'
                     });
-               });
-        </script>
-        <script type="text/javascript">
-            $(function () {
-                $('#id_to_date').datetimepicker({
+                }
+	            document.getElementById('id_to_date').oninput = function(){
+	            $('#id_to_date').datetimepicker({
                     format: 'mm/dd/yyyy'
                  });
-             });
-
+	            }
+	            document.getElementById('id_to_date').onchange = function(){
+	                this.value = checkDateRange(document.getElementById('id_from_date').value, this.value)
+	            }
+	       }
         </script>
 {% load crispy_forms_tags %}
 {% block content %}
