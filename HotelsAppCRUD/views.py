@@ -205,7 +205,7 @@ class RoomUpdate(UpdateView):
     form_class = RoomForm
     model = Room
     def update_room(request, id=None):
-        item = get_object_or_404(Hotel, id=id)
+        item = get_object_or_404(Room, id=id)
         form = RoomForm(request.POST or None, instance=item)
         if form.is_valid():
             room_item = form.save(commit=False)
@@ -291,7 +291,7 @@ class RoomReservationUpdate(UpdateView):
     form_class = RoomReservationForm
     model = RoomReservation
     def update_reservation(request, id=None):
-        item = get_object_or_404(Hotel, id=id)
+        item = get_object_or_404(RoomReservation, id=id)
         form = RoomReservationForm(request.POST or None, instance=item)
         if form.is_valid():
             reservation_item = form.save(commit=False)
@@ -306,7 +306,7 @@ class RoomReservationPubUpdate(UpdateView):
     form_class = RoomReservationForm
     model = RoomReservation
     def update_reservation(request, id=None):
-        item = get_object_or_404(Hotel, id=id)
+        item = get_object_or_404(RoomReservation, id=id)
         form = RoomReservationForm(request.POST or None, instance=item)
         if form.is_valid():
             reservation_item = form.save(commit=False)
@@ -363,7 +363,7 @@ class RoomServiceUpdate(UpdateView):
     form_class = RoomServiceForm
     model = RoomService
     def update_service(request, id=None):
-        item = get_object_or_404(Hotel, id=id)
+        item = get_object_or_404(RoomService, id=id)
         form = RoomServiceForm(request.POST or None, instance=item)
         if form.is_valid():
             service_item = form.save(commit=False)
@@ -420,7 +420,7 @@ class RoomChargesUpdate(UpdateView):
     form_class = RoomChargesForm
     model = RoomCharges
     def update_charges(request, id=None):
-        item = get_object_or_404(Hotel, id=id)
+        item = get_object_or_404(RoomCharges, id=id)
         form = RoomChargesForm(request.POST or None, instance=item)
         if form.is_valid():
             charge_item = form.save(commit=False)
@@ -477,7 +477,7 @@ class RoomBillingUpdate(UpdateView):
     form_class = RoomBillingForm
     model = RoomBilling
     def update_billing(request, id=None):
-        item = get_object_or_404(Hotel, id=id)
+        item = get_object_or_404(RoomBilling, id=id)
         form = RoomBillingForm(request.POST or None, instance=item)
         if form.is_valid():
             billing_item = form.save(commit=False)

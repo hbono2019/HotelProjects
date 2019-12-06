@@ -118,7 +118,7 @@
                <td>{{ roomreservationview.number_of_adults}}</td>
                <td>{{ roomreservationview.number_of_children}}</td>
                <td>{{ roomreservationview.payment_no}}</td>
-              <td> <a href="{% url 'HotelsAppCRUD:rooms_reservation_lookup_view' pk=roomreservationview.reservation_id %}" class="btn btn-info btn-block" role="button">Reservation Lookup</a> </td>
+              <td> <a href="{% url 'HotelsAppCRUD:rooms_reservation_lookup_view' pk=roomreservationview.reservation_id %}" class="btn btn-info btn-block" role="button">Reservation Lookup Detail</a> </td>
         </tr>
        {% endfor %}
       </tbody>
